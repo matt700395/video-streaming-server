@@ -1,28 +1,35 @@
 const express = require('express');
-const cors = require('cors');
-const NodeMediaServer = require('node-media-server');
+const SimpleWebRTC = require('simplewebrtc');
+const cv = require('opencv4nodejs');
+const ffmpeg = require('fluent-ffmpeg');
 
 const app = express();
-app.use(cors());
+app.use(express.static(__dirname + '/public'));
 
-const config = {
-  rtmp: {
-    port: 1935,
-    chunk_size: 60000,
-    gop_cache: true,
-    ping: 60,
-    ping_timeout: 30
-  },
-  http: {
-    port: 8000,
-    allow_origin: '*'
-  },
-  auth: {
-    play: false,
-    publish: false,
-    secret: 'abc123'
-  }
-};
+const webcamPort = 0;
+const cap = new cv.VideoCapture(webcamPort);
 
-var nms = new NodeMediaServer(config);
-nms.run();
+ffmpeg()
+  .input(cap)
+  .inputFormat('rawvideo')
+  .outputFormat('vp9')
+  .videoCodec('vp9')
+  .audioCodec('opus')
+  .outputOptions([
+    '-deadline realtime',
+    '-error-resilient 1'
+  ])
+  .output(function(stdout, stderr) {
+    const webrtc = new SimpleWebRTC({
+      localStream: stdout,
+      remoteVideosEl: 'remote-videos',
+      autoRequestMedia: false
+    });
+
+    webrtc.startLocalVideo();
+    webrtc.connect('your-room-name');
+  });
+
+app.listen(3000, function () {
+  console.log('WebRTC app listening on port 3000!');
+});

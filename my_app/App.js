@@ -1,20 +1,22 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
-import CameraExample from './CameraExample';
+import { View, StyleSheet } from 'react-native';
+import VideoStream from './VideoStream';
 
-export default function App() {
+const App = () => {
   return (
     <View style={styles.container}>
-      <CameraExample />
-      <StatusBar style="auto" />
+      <VideoStream />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
+
+export default App;

@@ -1,13 +1,12 @@
-import React from "react"
-import './App.css';
-import LiveStream from './LiveStream';
+import React from 'react';
+import VideoStream from './VideoStream';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <LiveStream streamUrl="rtmp://localhost:1935/live/abc123"/>
+    <div>
+      <VideoStream />
     </div>
   );
-}
+};
 
 export default App;
