@@ -1,4 +1,9 @@
+const express = require('express');
+const cors = require('cors');
 const NodeMediaServer = require('node-media-server');
+
+const app = express();
+app.use(cors());
 
 const config = {
   rtmp: {
@@ -19,5 +24,5 @@ const config = {
   }
 };
 
-var nms = new NodeMediaServer(config)
+var nms = new NodeMediaServer(config);
 nms.run();
