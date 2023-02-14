@@ -6,10 +6,10 @@ set(CMAKE_CXX_COMPILER clang++)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g3")
 
 add_executable(client
-        live-streaming-server/client/client.cpp)
+        client/client.cpp)
 
 add_executable(server
-        live-streaming-server/server/server.cpp)
+        server/server.cpp)
 
 target_include_directories(client PRIVATE "/opt/homebrew/opt/opencv/include/opencv4" "/opt/homebrew/opt/boost/include")
 target_include_directories(server PRIVATE "/opt/homebrew/opt/opencv/include/opencv4" "/opt/homebrew/opt/boost/include")
