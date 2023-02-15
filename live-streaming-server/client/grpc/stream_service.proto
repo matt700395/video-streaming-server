@@ -1,12 +1,7 @@
 syntax = "proto3";
 
 import "google/protobuf/empty.proto";
-
 package opencv;
-
-service StreamService {
-    rpc SendStream (stream OcvMat) returns (google.protobuf.Empty) {}
-}
 
 message OcvMat {
     int32 rows = 1;
@@ -14,4 +9,9 @@ message OcvMat {
     int32 elt_type = 3;
     int32 elt_size = 4;
     bytes mat_data = 5;
+}
+
+service StreamService {
+    // Bidirectional streaming method to send video frames.
+    rpc SendStream(stream OcvMat) returns (stream google.protobuf.Empty) {}
 }

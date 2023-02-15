@@ -68,16 +68,16 @@ const char descriptor_table_protodef_stream_5fservice_2eproto[] PROTOBUF_SECTION
   "\n\024stream_service.proto\022\006opencv\032\033google/p"
   "rotobuf/empty.proto\"Z\n\006OcvMat\022\014\n\004rows\030\001 "
   "\001(\005\022\014\n\004cols\030\002 \001(\005\022\020\n\010elt_type\030\003 \001(\005\022\020\n\010e"
-  "lt_size\030\004 \001(\005\022\020\n\010mat_data\030\005 \001(\0142I\n\rStrea"
-  "mService\0228\n\nSendStream\022\016.opencv.OcvMat\032\026"
-  ".google.protobuf.Empty\"\000(\001b\006proto3"
+  "lt_size\030\004 \001(\005\022\020\n\010mat_data\030\005 \001(\0142K\n\rStrea"
+  "mService\022:\n\nSendStream\022\016.opencv.OcvMat\032\026"
+  ".google.protobuf.Empty\"\000(\0010\001b\006proto3"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_stream_5fservice_2eproto_deps[1] = {
   &::descriptor_table_google_2fprotobuf_2fempty_2eproto,
 };
 static ::_pbi::once_flag descriptor_table_stream_5fservice_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_stream_5fservice_2eproto = {
-    false, false, 234, descriptor_table_protodef_stream_5fservice_2eproto,
+    false, false, 236, descriptor_table_protodef_stream_5fservice_2eproto,
     "stream_service.proto",
     &descriptor_table_stream_5fservice_2eproto_once, descriptor_table_stream_5fservice_2eproto_deps, 1, 1,
     schemas, file_default_instances, TableStruct_stream_5fservice_2eproto::offsets,
