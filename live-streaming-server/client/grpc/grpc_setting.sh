@@ -4,6 +4,7 @@ wget -c https://github.com/protocolbuffers/protobuf/releases/download/v21.12/pro
 # !! before protoc ... you should do following steps to build !!
 # $ cd grpc
 # $ mkdir -p cmake/build
+# $ cd cmake/build
 # $ cmake ../..
 # $ make -j4
 # $ sudo make install
