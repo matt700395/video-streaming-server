@@ -33,9 +33,7 @@ class VideoClient {
 	google::protobuf::Empty empty;
 
 	ClientContext context;
-	std::unique_ptr<grpc::ClientWriter<OcvMat>> writer(
-		stub_->SendStream(&context, &empty)
-	);
+	std::unique_ptr<grpc::ClientReaderWriter<OcvMat, google::protobuf::Empty>> writer(stub_->SendStream(&context));
 
 	writer->Write(ocvMat);
 	writer->WritesDone();
