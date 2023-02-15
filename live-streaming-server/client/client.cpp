@@ -3,11 +3,51 @@
 //
 
 #include "opencv2/opencv.hpp"
-#include <sys/socket.h>
-#include <arpa/inet.h>
-#include <unistd.h>
+#include <grpcpp/grpcpp.h>
+#include "./grpc/stream_service.pb.h"
+#include "./grpc/stream_service.grpc.pb.h"
 
 using namespace cv;
+
+using grpc::Channel;
+using grpc::ClientContext;
+using grpc::Status;
+using opencv::OcvMat;
+using opencv::StreamService;
+
+class VideoClient {
+ public:
+  VideoClient(std::shared_ptr<Channel> channel)
+	  : stub_(StreamService::NewStub(channel)) {}
+
+  bool SendStream(const Mat& frame) {
+	OcvMat ocvMat;
+	ocvMat.set_rows(frame.rows);
+	ocvMat.set_cols(frame.cols);
+	ocvMat.set_elt_type(frame.type());
+	ocvMat.set_elt_size(frame.elemSize());
+
+	// Assign the data to the proto message
+	ocvMat.set_mat_data(frame.data, frame.total() * frame.elemSize());
+
+	google::protobuf::Empty empty;
+
+	ClientContext context;
+	std::unique_ptr<grpc::ClientWriter<OcvMat>> writer(
+		stub_->SendStream(&context, &empty)
+	);
+
+	writer->Write(ocvMat);
+	writer->WritesDone();
+
+	Status status = writer->Finish();
+
+	return status.ok();
+  }
+
+ private:
+  std::unique_ptr<StreamService::Stub> stub_;
+};
 
 
 int main(int argc, char** argv)
@@ -16,68 +56,53 @@ int main(int argc, char** argv)
   //--------------------------------------------------------
   //networking stuff: socket , connect
   //--------------------------------------------------------
-  int         sokt;
   char*       serverIP;
   int         serverPort;
 
   if (argc < 3) {
 	std::cerr << "Usage: cv_video_cli <serverIP> <serverPort> " << std::endl;
+	return -1;
   }
 
   serverIP   = argv[1];
   serverPort = atoi(argv[2]);
 
-  struct  sockaddr_in serverAddr;
-  socklen_t           addrLen = sizeof(struct sockaddr_in);
-
-  if ((sokt = socket(PF_INET, SOCK_STREAM, 0)) < 0) {
-	std::cerr << "socket() failed" << std::endl;
-  }
-
-  serverAddr.sin_family = PF_INET;
-  serverAddr.sin_addr.s_addr = inet_addr(serverIP);
-  serverAddr.sin_port = htons(serverPort);
-
-  if (connect(sokt, (sockaddr*)&serverAddr, addrLen) < 0) {
-	std::cerr << "connect() failed!" << std::endl;
-  }
-
-
-
   //----------------------------------------------------------
   //OpenCV Code
   //----------------------------------------------------------
 
-  Mat img;
-  img = Mat::zeros(720 , 1280, CV_8UC1);
-  int imgSize = img.total() * img.elemSize();
-  uchar *iptr = img.data;
-  int bytes = 0;
-  int key;
+  VideoClient client(grpc::CreateChannel(
+	  serverIP + std::string(":") + std::to_string(serverPort),
+	  grpc::InsecureChannelCredentials())
+  );
 
-  //make img continuos
-  if ( ! img.isContinuous() ) {
-	img = img.clone();
+  VideoCapture capture;
+  capture.open(0); // open the default camera
+
+  if (!capture.isOpened()) {
+	std::cerr << "Failed to open camera!" << std::endl;
+	return -1;
   }
 
-  std::cout << "Image Size:" << imgSize << std::endl;
+  namedWindow("CV Video Client", 1);
 
+  while (waitKey(10) != 'q') {
 
-  namedWindow("CV Video Client",1);
+	Mat frame;
+	capture >> frame; // get a new frame from camera
 
-  while (key != 'q') {
-
-	if ((bytes = recv(sokt, iptr, imgSize , MSG_WAITALL)) == -1) {
-	  std::cerr << "recv failed, received bytes = " << bytes << std::endl;
+	if (frame.empty()) {
+	  std::cerr << "Failed to capture frame!" << std::endl;
+	  break;
 	}
 
+	if (!client.SendStream(frame)) {
+	  std::cerr << "Failed to send the frame!" << std::endl;
+	  break;
+	}
 
-	cv::imshow("CV Video Client", img);
-
-	if (key = cv::waitKey(10) >= 0) break;
+	imshow("CV Video Client", frame);
   }
-
-  close(sokt);
 
   return 0;
 }
