@@ -606,3 +606,4 @@ google-services.json
 # End of https://www.toptal.com/developers/gitignore/api/react,reactnative,node,c++,c,python,cmake
 
 live-streaming-server/client/grpc/protobuf-3.21.12
+live-streaming-server/client/grpc/grpc
