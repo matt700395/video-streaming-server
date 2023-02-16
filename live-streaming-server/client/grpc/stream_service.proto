@@ -11,10 +11,7 @@ message OcvMat {
 
 
 message GetMatRequest {
-  int32 rows = 1;
-  int32 cols = 2;
-  int32 elt_type = 3;
-  int32 value = 4;
+  bool status = 1;
 }
 
 message GetMatResponse {

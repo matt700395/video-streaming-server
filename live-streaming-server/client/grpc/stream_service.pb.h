@@ -371,45 +371,15 @@ class GetMatRequest final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kRowsFieldNumber = 1,
-    kColsFieldNumber = 2,
-    kEltTypeFieldNumber = 3,
-    kValueFieldNumber = 4,
+    kStatusFieldNumber = 1,
   };
-  // int32 rows = 1;
-  void clear_rows();
-  int32_t rows() const;
-  void set_rows(int32_t value);
+  // bool status = 1;
+  void clear_status();
+  bool status() const;
+  void set_status(bool value);
   private:
-  int32_t _internal_rows() const;
-  void _internal_set_rows(int32_t value);
-  public:
-
-  // int32 cols = 2;
-  void clear_cols();
-  int32_t cols() const;
-  void set_cols(int32_t value);
-  private:
-  int32_t _internal_cols() const;
-  void _internal_set_cols(int32_t value);
-  public:
-
-  // int32 elt_type = 3;
-  void clear_elt_type();
-  int32_t elt_type() const;
-  void set_elt_type(int32_t value);
-  private:
-  int32_t _internal_elt_type() const;
-  void _internal_set_elt_type(int32_t value);
-  public:
-
-  // int32 value = 4;
-  void clear_value();
-  int32_t value() const;
-  void set_value(int32_t value);
-  private:
-  int32_t _internal_value() const;
-  void _internal_set_value(int32_t value);
+  bool _internal_status() const;
+  void _internal_set_status(bool value);
   public:
 
   // @@protoc_insertion_point(class_scope:gRPC_stream.GetMatRequest)
@@ -420,10 +390,7 @@ class GetMatRequest final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    int32_t rows_;
-    int32_t cols_;
-    int32_t elt_type_;
-    int32_t value_;
+    bool status_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -711,84 +678,24 @@ inline void OcvMat::set_allocated_mat_data(std::string* mat_data) {
 
 // GetMatRequest
 
-// int32 rows = 1;
-inline void GetMatRequest::clear_rows() {
-  _impl_.rows_ = 0;
+// bool status = 1;
+inline void GetMatRequest::clear_status() {
+  _impl_.status_ = false;
 }
-inline int32_t GetMatRequest::_internal_rows() const {
-  return _impl_.rows_;
+inline bool GetMatRequest::_internal_status() const {
+  return _impl_.status_;
 }
-inline int32_t GetMatRequest::rows() const {
-  // @@protoc_insertion_point(field_get:gRPC_stream.GetMatRequest.rows)
-  return _internal_rows();
+inline bool GetMatRequest::status() const {
+  // @@protoc_insertion_point(field_get:gRPC_stream.GetMatRequest.status)
+  return _internal_status();
 }
-inline void GetMatRequest::_internal_set_rows(int32_t value) {
+inline void GetMatRequest::_internal_set_status(bool value) {
   
-  _impl_.rows_ = value;
+  _impl_.status_ = value;
 }
-inline void GetMatRequest::set_rows(int32_t value) {
-  _internal_set_rows(value);
-  // @@protoc_insertion_point(field_set:gRPC_stream.GetMatRequest.rows)
-}
-
-// int32 cols = 2;
-inline void GetMatRequest::clear_cols() {
-  _impl_.cols_ = 0;
-}
-inline int32_t GetMatRequest::_internal_cols() const {
-  return _impl_.cols_;
-}
-inline int32_t GetMatRequest::cols() const {
-  // @@protoc_insertion_point(field_get:gRPC_stream.GetMatRequest.cols)
-  return _internal_cols();
-}
-inline void GetMatRequest::_internal_set_cols(int32_t value) {
-  
-  _impl_.cols_ = value;
-}
-inline void GetMatRequest::set_cols(int32_t value) {
-  _internal_set_cols(value);
-  // @@protoc_insertion_point(field_set:gRPC_stream.GetMatRequest.cols)
-}
-
-// int32 elt_type = 3;
-inline void GetMatRequest::clear_elt_type() {
-  _impl_.elt_type_ = 0;
-}
-inline int32_t GetMatRequest::_internal_elt_type() const {
-  return _impl_.elt_type_;
-}
-inline int32_t GetMatRequest::elt_type() const {
-  // @@protoc_insertion_point(field_get:gRPC_stream.GetMatRequest.elt_type)
-  return _internal_elt_type();
-}
-inline void GetMatRequest::_internal_set_elt_type(int32_t value) {
-  
-  _impl_.elt_type_ = value;
-}
-inline void GetMatRequest::set_elt_type(int32_t value) {
-  _internal_set_elt_type(value);
-  // @@protoc_insertion_point(field_set:gRPC_stream.GetMatRequest.elt_type)
-}
-
-// int32 value = 4;
-inline void GetMatRequest::clear_value() {
-  _impl_.value_ = 0;
-}
-inline int32_t GetMatRequest::_internal_value() const {
-  return _impl_.value_;
-}
-inline int32_t GetMatRequest::value() const {
-  // @@protoc_insertion_point(field_get:gRPC_stream.GetMatRequest.value)
-  return _internal_value();
-}
-inline void GetMatRequest::_internal_set_value(int32_t value) {
-  
-  _impl_.value_ = value;
-}
-inline void GetMatRequest::set_value(int32_t value) {
-  _internal_set_value(value);
-  // @@protoc_insertion_point(field_set:gRPC_stream.GetMatRequest.value)
+inline void GetMatRequest::set_status(bool value) {
+  _internal_set_status(value);
+  // @@protoc_insertion_point(field_set:gRPC_stream.GetMatRequest.status)
 }
 
 // -------------------------------------------------------------------
