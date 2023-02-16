@@ -1,31 +1,40 @@
+import os
+import sys
 import grpc
-import opencv_pb2
-import opencv_pb2_grpc
 import numpy as np
 import cv2
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+from gRPC import stream_service_pb2 as str_pb
+from gRPC import stream_service_pb2_grpc as str_pb_grpc
 
+print("gRPC version: " +  grpc.__version__)
 # Create a channel to connect to the gRPC server
-channel = grpc.insecure_channel('localhost:50051')
+try:
 
-# Create a stub for the StreamService
-stub = opencv_pb2_grpc.StreamServiceStub(channel)
+    # Create a gRPC channel and stub
+    channel = grpc.insecure_channel('localhost:50051')
+    stub = str_pb_grpc.StreamServiceStub(channel)
 
-# Create a request for the GetMat method
-request = opencv_pb2.GetMatRequest(
-    rows=480,
-    cols=640,
-    elt_type=opencv_pb2.OcvMat.INT8,
-    value=128
-)
+    # Create a new `GetMatRequest` message with the `status` field set to True
+    request = str_pb.GetMatRequest(status=True)
 
-# Call the GetMat method to retrieve the Mat data from the server
-response = stub.GetMat(request)
+    # Iterate over the stream of `GetMatResponse` messages returned by the server
+    for response in stub.GetMat(request):
+        # Retrieve the `rows`, `cols`, and `elt_type` fields from the `OcvMat` object in the response message
+        rows = response.mat.rows
+        cols = response.mat.cols
+        elt_type = response.mat.elt_type
 
-# Convert the received Mat data to a NumPy array
-mat_data = np.frombuffer(response.mat.mat_data, dtype=np.int8)
-img = np.reshape(mat_data, (response.mat.rows, response.mat.cols))
+        # Retrieve the `mat_data` field from the `OcvMat` object in the response message
+        mat_data = response.mat.mat_data
 
-# Display the image using OpenCV
-cv2.imshow('Received image', img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+        # Create a new OpenCV Mat object from the `mat_data` field
+        mat = np.frombuffer(mat_data, dtype=np.uint8).reshape(rows, cols, -1)
+
+        # Display the image in a window named "OpenCV Image"
+        cv2.imshow("OpenCV Image", mat)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+
+except grpc.RpcError as e:
+    print(f"Error occurred: {e}")
