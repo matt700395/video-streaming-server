@@ -35,43 +35,44 @@ class StreamService final {
   class StubInterface {
    public:
     virtual ~StubInterface() {}
-    // Returns the current state of the global Mat variable.
-    virtual ::grpc::Status GetMat(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::opencv::OcvMat* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::opencv::OcvMat>> AsyncGetMat(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::opencv::OcvMat>>(AsyncGetMatRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientReaderInterface< ::opencv::GetMatResponse>> GetMat(::grpc::ClientContext* context, const ::opencv::GetMatRequest& request) {
+      return std::unique_ptr< ::grpc::ClientReaderInterface< ::opencv::GetMatResponse>>(GetMatRaw(context, request));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::opencv::OcvMat>> PrepareAsyncGetMat(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::opencv::OcvMat>>(PrepareAsyncGetMatRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::opencv::GetMatResponse>> AsyncGetMat(::grpc::ClientContext* context, const ::opencv::GetMatRequest& request, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::opencv::GetMatResponse>>(AsyncGetMatRaw(context, request, cq, tag));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::opencv::GetMatResponse>> PrepareAsyncGetMat(::grpc::ClientContext* context, const ::opencv::GetMatRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::opencv::GetMatResponse>>(PrepareAsyncGetMatRaw(context, request, cq));
     }
     class async_interface {
      public:
       virtual ~async_interface() {}
-      // Returns the current state of the global Mat variable.
-      virtual void GetMat(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::opencv::OcvMat* response, std::function<void(::grpc::Status)>) = 0;
-      virtual void GetMat(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::opencv::OcvMat* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void GetMat(::grpc::ClientContext* context, const ::opencv::GetMatRequest* request, ::grpc::ClientReadReactor< ::opencv::GetMatResponse>* reactor) = 0;
     };
     typedef class async_interface experimental_async_interface;
     virtual class async_interface* async() { return nullptr; }
     class async_interface* experimental_async() { return async(); }
    private:
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::opencv::OcvMat>* AsyncGetMatRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::opencv::OcvMat>* PrepareAsyncGetMatRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientReaderInterface< ::opencv::GetMatResponse>* GetMatRaw(::grpc::ClientContext* context, const ::opencv::GetMatRequest& request) = 0;
+    virtual ::grpc::ClientAsyncReaderInterface< ::opencv::GetMatResponse>* AsyncGetMatRaw(::grpc::ClientContext* context, const ::opencv::GetMatRequest& request, ::grpc::CompletionQueue* cq, void* tag) = 0;
+    virtual ::grpc::ClientAsyncReaderInterface< ::opencv::GetMatResponse>* PrepareAsyncGetMatRaw(::grpc::ClientContext* context, const ::opencv::GetMatRequest& request, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub final : public StubInterface {
    public:
     Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
-    ::grpc::Status GetMat(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::opencv::OcvMat* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::opencv::OcvMat>> AsyncGetMat(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::opencv::OcvMat>>(AsyncGetMatRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientReader< ::opencv::GetMatResponse>> GetMat(::grpc::ClientContext* context, const ::opencv::GetMatRequest& request) {
+      return std::unique_ptr< ::grpc::ClientReader< ::opencv::GetMatResponse>>(GetMatRaw(context, request));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::opencv::OcvMat>> PrepareAsyncGetMat(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::opencv::OcvMat>>(PrepareAsyncGetMatRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncReader< ::opencv::GetMatResponse>> AsyncGetMat(::grpc::ClientContext* context, const ::opencv::GetMatRequest& request, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReader< ::opencv::GetMatResponse>>(AsyncGetMatRaw(context, request, cq, tag));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReader< ::opencv::GetMatResponse>> PrepareAsyncGetMat(::grpc::ClientContext* context, const ::opencv::GetMatRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReader< ::opencv::GetMatResponse>>(PrepareAsyncGetMatRaw(context, request, cq));
     }
     class async final :
       public StubInterface::async_interface {
      public:
-      void GetMat(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::opencv::OcvMat* response, std::function<void(::grpc::Status)>) override;
-      void GetMat(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::opencv::OcvMat* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void GetMat(::grpc::ClientContext* context, const ::opencv::GetMatRequest* request, ::grpc::ClientReadReactor< ::opencv::GetMatResponse>* reactor) override;
      private:
       friend class Stub;
       explicit async(Stub* stub): stub_(stub) { }
@@ -83,8 +84,9 @@ class StreamService final {
    private:
     std::shared_ptr< ::grpc::ChannelInterface> channel_;
     class async async_stub_{this};
-    ::grpc::ClientAsyncResponseReader< ::opencv::OcvMat>* AsyncGetMatRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::opencv::OcvMat>* PrepareAsyncGetMatRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientReader< ::opencv::GetMatResponse>* GetMatRaw(::grpc::ClientContext* context, const ::opencv::GetMatRequest& request) override;
+    ::grpc::ClientAsyncReader< ::opencv::GetMatResponse>* AsyncGetMatRaw(::grpc::ClientContext* context, const ::opencv::GetMatRequest& request, ::grpc::CompletionQueue* cq, void* tag) override;
+    ::grpc::ClientAsyncReader< ::opencv::GetMatResponse>* PrepareAsyncGetMatRaw(::grpc::ClientContext* context, const ::opencv::GetMatRequest& request, ::grpc::CompletionQueue* cq) override;
     const ::grpc::internal::RpcMethod rpcmethod_GetMat_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
@@ -93,8 +95,7 @@ class StreamService final {
    public:
     Service();
     virtual ~Service();
-    // Returns the current state of the global Mat variable.
-    virtual ::grpc::Status GetMat(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::opencv::OcvMat* response);
+    virtual ::grpc::Status GetMat(::grpc::ServerContext* context, const ::opencv::GetMatRequest* request, ::grpc::ServerWriter< ::opencv::GetMatResponse>* writer);
   };
   template <class BaseClass>
   class WithAsyncMethod_GetMat : public BaseClass {
@@ -108,12 +109,12 @@ class StreamService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetMat(::grpc::ServerContext* /*context*/, const ::google::protobuf::Empty* /*request*/, ::opencv::OcvMat* /*response*/) override {
+    ::grpc::Status GetMat(::grpc::ServerContext* /*context*/, const ::opencv::GetMatRequest* /*request*/, ::grpc::ServerWriter< ::opencv::GetMatResponse>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestGetMat(::grpc::ServerContext* context, ::google::protobuf::Empty* request, ::grpc::ServerAsyncResponseWriter< ::opencv::OcvMat>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
+    void RequestGetMat(::grpc::ServerContext* context, ::opencv::GetMatRequest* request, ::grpc::ServerAsyncWriter< ::opencv::GetMatResponse>* writer, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncServerStreaming(0, context, request, writer, new_call_cq, notification_cq, tag);
     }
   };
   typedef WithAsyncMethod_GetMat<Service > AsyncService;
@@ -124,25 +125,20 @@ class StreamService final {
    public:
     WithCallbackMethod_GetMat() {
       ::grpc::Service::MarkMethodCallback(0,
-          new ::grpc::internal::CallbackUnaryHandler< ::google::protobuf::Empty, ::opencv::OcvMat>(
+          new ::grpc::internal::CallbackServerStreamingHandler< ::opencv::GetMatRequest, ::opencv::GetMatResponse>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::google::protobuf::Empty* request, ::opencv::OcvMat* response) { return this->GetMat(context, request, response); }));}
-    void SetMessageAllocatorFor_GetMat(
-        ::grpc::MessageAllocator< ::google::protobuf::Empty, ::opencv::OcvMat>* allocator) {
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(0);
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::google::protobuf::Empty, ::opencv::OcvMat>*>(handler)
-              ->SetMessageAllocator(allocator);
+                   ::grpc::CallbackServerContext* context, const ::opencv::GetMatRequest* request) { return this->GetMat(context, request); }));
     }
     ~WithCallbackMethod_GetMat() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetMat(::grpc::ServerContext* /*context*/, const ::google::protobuf::Empty* /*request*/, ::opencv::OcvMat* /*response*/) override {
+    ::grpc::Status GetMat(::grpc::ServerContext* /*context*/, const ::opencv::GetMatRequest* /*request*/, ::grpc::ServerWriter< ::opencv::GetMatResponse>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual ::grpc::ServerUnaryReactor* GetMat(
-      ::grpc::CallbackServerContext* /*context*/, const ::google::protobuf::Empty* /*request*/, ::opencv::OcvMat* /*response*/)  { return nullptr; }
+    virtual ::grpc::ServerWriteReactor< ::opencv::GetMatResponse>* GetMat(
+      ::grpc::CallbackServerContext* /*context*/, const ::opencv::GetMatRequest* /*request*/)  { return nullptr; }
   };
   typedef WithCallbackMethod_GetMat<Service > CallbackService;
   typedef CallbackService ExperimentalCallbackService;
@@ -158,7 +154,7 @@ class StreamService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetMat(::grpc::ServerContext* /*context*/, const ::google::protobuf::Empty* /*request*/, ::opencv::OcvMat* /*response*/) override {
+    ::grpc::Status GetMat(::grpc::ServerContext* /*context*/, const ::opencv::GetMatRequest* /*request*/, ::grpc::ServerWriter< ::opencv::GetMatResponse>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -175,12 +171,12 @@ class StreamService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetMat(::grpc::ServerContext* /*context*/, const ::google::protobuf::Empty* /*request*/, ::opencv::OcvMat* /*response*/) override {
+    ::grpc::Status GetMat(::grpc::ServerContext* /*context*/, const ::opencv::GetMatRequest* /*request*/, ::grpc::ServerWriter< ::opencv::GetMatResponse>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestGetMat(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
+    void RequestGetMat(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncWriter< ::grpc::ByteBuffer>* writer, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncServerStreaming(0, context, request, writer, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -190,51 +186,51 @@ class StreamService final {
    public:
     WithRawCallbackMethod_GetMat() {
       ::grpc::Service::MarkMethodRawCallback(0,
-          new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+          new ::grpc::internal::CallbackServerStreamingHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->GetMat(context, request, response); }));
+                   ::grpc::CallbackServerContext* context, const::grpc::ByteBuffer* request) { return this->GetMat(context, request); }));
     }
     ~WithRawCallbackMethod_GetMat() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetMat(::grpc::ServerContext* /*context*/, const ::google::protobuf::Empty* /*request*/, ::opencv::OcvMat* /*response*/) override {
+    ::grpc::Status GetMat(::grpc::ServerContext* /*context*/, const ::opencv::GetMatRequest* /*request*/, ::grpc::ServerWriter< ::opencv::GetMatResponse>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual ::grpc::ServerUnaryReactor* GetMat(
-      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
+    virtual ::grpc::ServerWriteReactor< ::grpc::ByteBuffer>* GetMat(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/)  { return nullptr; }
   };
+  typedef Service StreamedUnaryService;
   template <class BaseClass>
-  class WithStreamedUnaryMethod_GetMat : public BaseClass {
+  class WithSplitStreamingMethod_GetMat : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithStreamedUnaryMethod_GetMat() {
+    WithSplitStreamingMethod_GetMat() {
       ::grpc::Service::MarkMethodStreamed(0,
-        new ::grpc::internal::StreamedUnaryHandler<
-          ::google::protobuf::Empty, ::opencv::OcvMat>(
+        new ::grpc::internal::SplitServerStreamingHandler<
+          ::opencv::GetMatRequest, ::opencv::GetMatResponse>(
             [this](::grpc::ServerContext* context,
-                   ::grpc::ServerUnaryStreamer<
-                     ::google::protobuf::Empty, ::opencv::OcvMat>* streamer) {
+                   ::grpc::ServerSplitStreamer<
+                     ::opencv::GetMatRequest, ::opencv::GetMatResponse>* streamer) {
                        return this->StreamedGetMat(context,
                          streamer);
                   }));
     }
-    ~WithStreamedUnaryMethod_GetMat() override {
+    ~WithSplitStreamingMethod_GetMat() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status GetMat(::grpc::ServerContext* /*context*/, const ::google::protobuf::Empty* /*request*/, ::opencv::OcvMat* /*response*/) override {
+    ::grpc::Status GetMat(::grpc::ServerContext* /*context*/, const ::opencv::GetMatRequest* /*request*/, ::grpc::ServerWriter< ::opencv::GetMatResponse>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedGetMat(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::google::protobuf::Empty,::opencv::OcvMat>* server_unary_streamer) = 0;
+    // replace default version of method with split streamed
+    virtual ::grpc::Status StreamedGetMat(::grpc::ServerContext* context, ::grpc::ServerSplitStreamer< ::opencv::GetMatRequest,::opencv::GetMatResponse>* server_split_streamer) = 0;
   };
-  typedef WithStreamedUnaryMethod_GetMat<Service > StreamedUnaryService;
-  typedef Service SplitStreamedService;
-  typedef WithStreamedUnaryMethod_GetMat<Service > StreamedService;
+  typedef WithSplitStreamingMethod_GetMat<Service > SplitStreamedService;
+  typedef WithSplitStreamingMethod_GetMat<Service > StreamedService;
 };
 
 }  // namespace opencv

@@ -30,7 +30,6 @@
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
 #include <google/protobuf/unknown_field_set.h>
-#include <google/protobuf/empty.pb.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
 #define PROTOBUF_INTERNAL_EXPORT_stream_5fservice_2eproto
@@ -46,11 +45,19 @@ struct TableStruct_stream_5fservice_2eproto {
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_stream_5fservice_2eproto;
 namespace opencv {
+class GetMatRequest;
+struct GetMatRequestDefaultTypeInternal;
+extern GetMatRequestDefaultTypeInternal _GetMatRequest_default_instance_;
+class GetMatResponse;
+struct GetMatResponseDefaultTypeInternal;
+extern GetMatResponseDefaultTypeInternal _GetMatResponse_default_instance_;
 class OcvMat;
 struct OcvMatDefaultTypeInternal;
 extern OcvMatDefaultTypeInternal _OcvMat_default_instance_;
 }  // namespace opencv
 PROTOBUF_NAMESPACE_OPEN
+template<> ::opencv::GetMatRequest* Arena::CreateMaybeMessage<::opencv::GetMatRequest>(Arena*);
+template<> ::opencv::GetMatResponse* Arena::CreateMaybeMessage<::opencv::GetMatResponse>(Arena*);
 template<> ::opencv::OcvMat* Arena::CreateMaybeMessage<::opencv::OcvMat>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace opencv {
@@ -178,13 +185,12 @@ class OcvMat final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kMatDataFieldNumber = 5,
+    kMatDataFieldNumber = 4,
     kRowsFieldNumber = 1,
     kColsFieldNumber = 2,
     kEltTypeFieldNumber = 3,
-    kEltSizeFieldNumber = 4,
   };
-  // bytes mat_data = 5;
+  // bytes mat_data = 4;
   void clear_mat_data();
   const std::string& mat_data() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -225,15 +231,6 @@ class OcvMat final :
   void _internal_set_elt_type(int32_t value);
   public:
 
-  // int32 elt_size = 4;
-  void clear_elt_size();
-  int32_t elt_size() const;
-  void set_elt_size(int32_t value);
-  private:
-  int32_t _internal_elt_size() const;
-  void _internal_set_elt_size(int32_t value);
-  public:
-
   // @@protoc_insertion_point(class_scope:opencv.OcvMat)
  private:
   class _Internal;
@@ -246,7 +243,344 @@ class OcvMat final :
     int32_t rows_;
     int32_t cols_;
     int32_t elt_type_;
-    int32_t elt_size_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_stream_5fservice_2eproto;
+};
+// -------------------------------------------------------------------
+
+class GetMatRequest final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:opencv.GetMatRequest) */ {
+ public:
+  inline GetMatRequest() : GetMatRequest(nullptr) {}
+  ~GetMatRequest() override;
+  explicit PROTOBUF_CONSTEXPR GetMatRequest(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  GetMatRequest(const GetMatRequest& from);
+  GetMatRequest(GetMatRequest&& from) noexcept
+    : GetMatRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline GetMatRequest& operator=(const GetMatRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline GetMatRequest& operator=(GetMatRequest&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const GetMatRequest& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const GetMatRequest* internal_default_instance() {
+    return reinterpret_cast<const GetMatRequest*>(
+               &_GetMatRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    1;
+
+  friend void swap(GetMatRequest& a, GetMatRequest& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(GetMatRequest* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(GetMatRequest* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  GetMatRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<GetMatRequest>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const GetMatRequest& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const GetMatRequest& from) {
+    GetMatRequest::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(GetMatRequest* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "opencv.GetMatRequest";
+  }
+  protected:
+  explicit GetMatRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kRowsFieldNumber = 1,
+    kColsFieldNumber = 2,
+    kEltTypeFieldNumber = 3,
+    kValueFieldNumber = 4,
+  };
+  // int32 rows = 1;
+  void clear_rows();
+  int32_t rows() const;
+  void set_rows(int32_t value);
+  private:
+  int32_t _internal_rows() const;
+  void _internal_set_rows(int32_t value);
+  public:
+
+  // int32 cols = 2;
+  void clear_cols();
+  int32_t cols() const;
+  void set_cols(int32_t value);
+  private:
+  int32_t _internal_cols() const;
+  void _internal_set_cols(int32_t value);
+  public:
+
+  // int32 elt_type = 3;
+  void clear_elt_type();
+  int32_t elt_type() const;
+  void set_elt_type(int32_t value);
+  private:
+  int32_t _internal_elt_type() const;
+  void _internal_set_elt_type(int32_t value);
+  public:
+
+  // int32 value = 4;
+  void clear_value();
+  int32_t value() const;
+  void set_value(int32_t value);
+  private:
+  int32_t _internal_value() const;
+  void _internal_set_value(int32_t value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:opencv.GetMatRequest)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    int32_t rows_;
+    int32_t cols_;
+    int32_t elt_type_;
+    int32_t value_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_stream_5fservice_2eproto;
+};
+// -------------------------------------------------------------------
+
+class GetMatResponse final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:opencv.GetMatResponse) */ {
+ public:
+  inline GetMatResponse() : GetMatResponse(nullptr) {}
+  ~GetMatResponse() override;
+  explicit PROTOBUF_CONSTEXPR GetMatResponse(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  GetMatResponse(const GetMatResponse& from);
+  GetMatResponse(GetMatResponse&& from) noexcept
+    : GetMatResponse() {
+    *this = ::std::move(from);
+  }
+
+  inline GetMatResponse& operator=(const GetMatResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline GetMatResponse& operator=(GetMatResponse&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const GetMatResponse& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const GetMatResponse* internal_default_instance() {
+    return reinterpret_cast<const GetMatResponse*>(
+               &_GetMatResponse_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    2;
+
+  friend void swap(GetMatResponse& a, GetMatResponse& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(GetMatResponse* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(GetMatResponse* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  GetMatResponse* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<GetMatResponse>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const GetMatResponse& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const GetMatResponse& from) {
+    GetMatResponse::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(GetMatResponse* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "opencv.GetMatResponse";
+  }
+  protected:
+  explicit GetMatResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kMatFieldNumber = 1,
+  };
+  // .opencv.OcvMat mat = 1;
+  bool has_mat() const;
+  private:
+  bool _internal_has_mat() const;
+  public:
+  void clear_mat();
+  const ::opencv::OcvMat& mat() const;
+  PROTOBUF_NODISCARD ::opencv::OcvMat* release_mat();
+  ::opencv::OcvMat* mutable_mat();
+  void set_allocated_mat(::opencv::OcvMat* mat);
+  private:
+  const ::opencv::OcvMat& _internal_mat() const;
+  ::opencv::OcvMat* _internal_mutable_mat();
+  public:
+  void unsafe_arena_set_allocated_mat(
+      ::opencv::OcvMat* mat);
+  ::opencv::OcvMat* unsafe_arena_release_mat();
+
+  // @@protoc_insertion_point(class_scope:opencv.GetMatResponse)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::opencv::OcvMat* mat_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -323,27 +657,7 @@ inline void OcvMat::set_elt_type(int32_t value) {
   // @@protoc_insertion_point(field_set:opencv.OcvMat.elt_type)
 }
 
-// int32 elt_size = 4;
-inline void OcvMat::clear_elt_size() {
-  _impl_.elt_size_ = 0;
-}
-inline int32_t OcvMat::_internal_elt_size() const {
-  return _impl_.elt_size_;
-}
-inline int32_t OcvMat::elt_size() const {
-  // @@protoc_insertion_point(field_get:opencv.OcvMat.elt_size)
-  return _internal_elt_size();
-}
-inline void OcvMat::_internal_set_elt_size(int32_t value) {
-  
-  _impl_.elt_size_ = value;
-}
-inline void OcvMat::set_elt_size(int32_t value) {
-  _internal_set_elt_size(value);
-  // @@protoc_insertion_point(field_set:opencv.OcvMat.elt_size)
-}
-
-// bytes mat_data = 5;
+// bytes mat_data = 4;
 inline void OcvMat::clear_mat_data() {
   _impl_.mat_data_.ClearToEmpty();
 }
@@ -393,9 +707,191 @@ inline void OcvMat::set_allocated_mat_data(std::string* mat_data) {
   // @@protoc_insertion_point(field_set_allocated:opencv.OcvMat.mat_data)
 }
 
+// -------------------------------------------------------------------
+
+// GetMatRequest
+
+// int32 rows = 1;
+inline void GetMatRequest::clear_rows() {
+  _impl_.rows_ = 0;
+}
+inline int32_t GetMatRequest::_internal_rows() const {
+  return _impl_.rows_;
+}
+inline int32_t GetMatRequest::rows() const {
+  // @@protoc_insertion_point(field_get:opencv.GetMatRequest.rows)
+  return _internal_rows();
+}
+inline void GetMatRequest::_internal_set_rows(int32_t value) {
+  
+  _impl_.rows_ = value;
+}
+inline void GetMatRequest::set_rows(int32_t value) {
+  _internal_set_rows(value);
+  // @@protoc_insertion_point(field_set:opencv.GetMatRequest.rows)
+}
+
+// int32 cols = 2;
+inline void GetMatRequest::clear_cols() {
+  _impl_.cols_ = 0;
+}
+inline int32_t GetMatRequest::_internal_cols() const {
+  return _impl_.cols_;
+}
+inline int32_t GetMatRequest::cols() const {
+  // @@protoc_insertion_point(field_get:opencv.GetMatRequest.cols)
+  return _internal_cols();
+}
+inline void GetMatRequest::_internal_set_cols(int32_t value) {
+  
+  _impl_.cols_ = value;
+}
+inline void GetMatRequest::set_cols(int32_t value) {
+  _internal_set_cols(value);
+  // @@protoc_insertion_point(field_set:opencv.GetMatRequest.cols)
+}
+
+// int32 elt_type = 3;
+inline void GetMatRequest::clear_elt_type() {
+  _impl_.elt_type_ = 0;
+}
+inline int32_t GetMatRequest::_internal_elt_type() const {
+  return _impl_.elt_type_;
+}
+inline int32_t GetMatRequest::elt_type() const {
+  // @@protoc_insertion_point(field_get:opencv.GetMatRequest.elt_type)
+  return _internal_elt_type();
+}
+inline void GetMatRequest::_internal_set_elt_type(int32_t value) {
+  
+  _impl_.elt_type_ = value;
+}
+inline void GetMatRequest::set_elt_type(int32_t value) {
+  _internal_set_elt_type(value);
+  // @@protoc_insertion_point(field_set:opencv.GetMatRequest.elt_type)
+}
+
+// int32 value = 4;
+inline void GetMatRequest::clear_value() {
+  _impl_.value_ = 0;
+}
+inline int32_t GetMatRequest::_internal_value() const {
+  return _impl_.value_;
+}
+inline int32_t GetMatRequest::value() const {
+  // @@protoc_insertion_point(field_get:opencv.GetMatRequest.value)
+  return _internal_value();
+}
+inline void GetMatRequest::_internal_set_value(int32_t value) {
+  
+  _impl_.value_ = value;
+}
+inline void GetMatRequest::set_value(int32_t value) {
+  _internal_set_value(value);
+  // @@protoc_insertion_point(field_set:opencv.GetMatRequest.value)
+}
+
+// -------------------------------------------------------------------
+
+// GetMatResponse
+
+// .opencv.OcvMat mat = 1;
+inline bool GetMatResponse::_internal_has_mat() const {
+  return this != internal_default_instance() && _impl_.mat_ != nullptr;
+}
+inline bool GetMatResponse::has_mat() const {
+  return _internal_has_mat();
+}
+inline void GetMatResponse::clear_mat() {
+  if (GetArenaForAllocation() == nullptr && _impl_.mat_ != nullptr) {
+    delete _impl_.mat_;
+  }
+  _impl_.mat_ = nullptr;
+}
+inline const ::opencv::OcvMat& GetMatResponse::_internal_mat() const {
+  const ::opencv::OcvMat* p = _impl_.mat_;
+  return p != nullptr ? *p : reinterpret_cast<const ::opencv::OcvMat&>(
+      ::opencv::_OcvMat_default_instance_);
+}
+inline const ::opencv::OcvMat& GetMatResponse::mat() const {
+  // @@protoc_insertion_point(field_get:opencv.GetMatResponse.mat)
+  return _internal_mat();
+}
+inline void GetMatResponse::unsafe_arena_set_allocated_mat(
+    ::opencv::OcvMat* mat) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.mat_);
+  }
+  _impl_.mat_ = mat;
+  if (mat) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:opencv.GetMatResponse.mat)
+}
+inline ::opencv::OcvMat* GetMatResponse::release_mat() {
+  
+  ::opencv::OcvMat* temp = _impl_.mat_;
+  _impl_.mat_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::opencv::OcvMat* GetMatResponse::unsafe_arena_release_mat() {
+  // @@protoc_insertion_point(field_release:opencv.GetMatResponse.mat)
+  
+  ::opencv::OcvMat* temp = _impl_.mat_;
+  _impl_.mat_ = nullptr;
+  return temp;
+}
+inline ::opencv::OcvMat* GetMatResponse::_internal_mutable_mat() {
+  
+  if (_impl_.mat_ == nullptr) {
+    auto* p = CreateMaybeMessage<::opencv::OcvMat>(GetArenaForAllocation());
+    _impl_.mat_ = p;
+  }
+  return _impl_.mat_;
+}
+inline ::opencv::OcvMat* GetMatResponse::mutable_mat() {
+  ::opencv::OcvMat* _msg = _internal_mutable_mat();
+  // @@protoc_insertion_point(field_mutable:opencv.GetMatResponse.mat)
+  return _msg;
+}
+inline void GetMatResponse::set_allocated_mat(::opencv::OcvMat* mat) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete _impl_.mat_;
+  }
+  if (mat) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(mat);
+    if (message_arena != submessage_arena) {
+      mat = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, mat, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  _impl_.mat_ = mat;
+  // @@protoc_insertion_point(field_set_allocated:opencv.GetMatResponse.mat)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 
 // @@protoc_insertion_point(namespace_scope)
 
