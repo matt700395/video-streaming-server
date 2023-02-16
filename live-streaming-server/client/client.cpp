@@ -24,25 +24,28 @@ std::mutex g_mat_mutex;
 // Implementation of the GetMat method
 class StreamServiceImpl final : public StreamService::Service {
  public:
-  Status GetMat(ServerContext* context, const GetMatRequest* request, GetMatResponse* response) {
+  Status GetMat(ServerContext *context, const GetMatRequest *request,
+				grpc::ServerWriter<GetMatResponse> *writer) {
+	std::cout << "GetMat called " << std::endl;
+	bool status = request->status();
+
 	// Lock the mutex before accessing the Mat data
 	g_mat_mutex.lock();
-
 	// Create and fill a new Mat object from the Mat data
 	cv::Mat mat = g_mat.clone();
-
 	// Unlock the mutex after accessing the Mat data
 	g_mat_mutex.unlock();
 
 	// Create an OcvMat message with the Mat data
-	OcvMat ocv_mat;
-	ocv_mat.set_rows(mat.rows);
-	ocv_mat.set_cols(mat.cols);
-	ocv_mat.set_elt_type(mat.type());
-	ocv_mat.set_mat_data(mat.data, mat.total() * mat.elemSize());
+	GetMatResponse response;
+	OcvMat* ocvMat = response.mutable_mat();
+	ocvMat->set_rows(mat.rows);
+	ocvMat->set_cols(mat.cols);
+	ocvMat->set_elt_type(mat.type());
+	ocvMat->set_mat_data(mat.data, mat.total() * mat.elemSize());
 
 	// Set the mat field of the response message to the new OcvMat object
-	response->set_allocated_mat(&ocv_mat);
+	writer->Write(response);
 
 	return Status::OK;
   }
@@ -50,7 +53,7 @@ class StreamServiceImpl final : public StreamService::Service {
 };
 
 // Function to handle the socket communication on a separate thread
-void socket_thread(char* serverIP, int serverPort) {
+void socket_thread(char *serverIP, int serverPort) {
   int sokt;
   struct sockaddr_in serverAddr;
   socklen_t addrLen = sizeof(struct sockaddr_in);
@@ -101,8 +104,9 @@ void socket_thread(char* serverIP, int serverPort) {
   close(sokt);
 }
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
   // Start the socket communication thread
+  std::cout << "gRPC version: " << grpc::Version() << std::endl;
   std::thread socket_t(socket_thread, argv[1], atoi(argv[2]));
 
   // Set up the gRPC server on the main thread
@@ -114,6 +118,7 @@ int main(int argc, char** argv) {
   std::unique_ptr<Server> server(builder.BuildAndStart());
 
   // Wait for the gRPC server to shut down
+  std::cout << "Server listening on " << server_address << std::endl;
   server->Wait();
 
   // Wait for the socket communication thread to finish

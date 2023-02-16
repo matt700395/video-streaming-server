@@ -39,10 +39,7 @@ struct OcvMatDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 OcvMatDefaultTypeInternal _OcvMat_default_instance_;
 PROTOBUF_CONSTEXPR GetMatRequest::GetMatRequest(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.rows_)*/0
-  , /*decltype(_impl_.cols_)*/0
-  , /*decltype(_impl_.elt_type_)*/0
-  , /*decltype(_impl_.value_)*/0
+    /*decltype(_impl_.status_)*/false
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct GetMatRequestDefaultTypeInternal {
   PROTOBUF_CONSTEXPR GetMatRequestDefaultTypeInternal()
@@ -88,10 +85,7 @@ const uint32_t TableStruct_stream_5fservice_2eproto::offsets[] PROTOBUF_SECTION_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::gRPC_stream::GetMatRequest, _impl_.rows_),
-  PROTOBUF_FIELD_OFFSET(::gRPC_stream::GetMatRequest, _impl_.cols_),
-  PROTOBUF_FIELD_OFFSET(::gRPC_stream::GetMatRequest, _impl_.elt_type_),
-  PROTOBUF_FIELD_OFFSET(::gRPC_stream::GetMatRequest, _impl_.value_),
+  PROTOBUF_FIELD_OFFSET(::gRPC_stream::GetMatRequest, _impl_.status_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::gRPC_stream::GetMatResponse, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -103,7 +97,7 @@ const uint32_t TableStruct_stream_5fservice_2eproto::offsets[] PROTOBUF_SECTION_
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::gRPC_stream::OcvMat)},
   { 10, -1, -1, sizeof(::gRPC_stream::GetMatRequest)},
-  { 20, -1, -1, sizeof(::gRPC_stream::GetMatResponse)},
+  { 17, -1, -1, sizeof(::gRPC_stream::GetMatResponse)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -115,17 +109,16 @@ static const ::_pb::Message* const file_default_instances[] = {
 const char descriptor_table_protodef_stream_5fservice_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\024stream_service.proto\022\013gRPC_stream\"H\n\006O"
   "cvMat\022\014\n\004rows\030\001 \001(\005\022\014\n\004cols\030\002 \001(\005\022\020\n\010elt"
-  "_type\030\003 \001(\005\022\020\n\010mat_data\030\004 \001(\014\"L\n\rGetMatR"
-  "equest\022\014\n\004rows\030\001 \001(\005\022\014\n\004cols\030\002 \001(\005\022\020\n\010el"
-  "t_type\030\003 \001(\005\022\r\n\005value\030\004 \001(\005\"2\n\016GetMatRes"
-  "ponse\022 \n\003mat\030\001 \001(\0132\023.gRPC_stream.OcvMat2"
-  "V\n\rStreamService\022E\n\006GetMat\022\032.gRPC_stream"
-  ".GetMatRequest\032\033.gRPC_stream.GetMatRespo"
-  "nse\"\0000\001b\006proto3"
+  "_type\030\003 \001(\005\022\020\n\010mat_data\030\004 \001(\014\"\037\n\rGetMatR"
+  "equest\022\016\n\006status\030\001 \001(\010\"2\n\016GetMatResponse"
+  "\022 \n\003mat\030\001 \001(\0132\023.gRPC_stream.OcvMat2V\n\rSt"
+  "reamService\022E\n\006GetMat\022\032.gRPC_stream.GetM"
+  "atRequest\032\033.gRPC_stream.GetMatResponse\"\000"
+  "0\001b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_stream_5fservice_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_stream_5fservice_2eproto = {
-    false, false, 335, descriptor_table_protodef_stream_5fservice_2eproto,
+    false, false, 290, descriptor_table_protodef_stream_5fservice_2eproto,
     "stream_service.proto",
     &descriptor_table_stream_5fservice_2eproto_once, nullptr, 0, 3,
     schemas, file_default_instances, TableStruct_stream_5fservice_2eproto::offsets,
@@ -438,16 +431,11 @@ GetMatRequest::GetMatRequest(const GetMatRequest& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   GetMatRequest* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.rows_){}
-    , decltype(_impl_.cols_){}
-    , decltype(_impl_.elt_type_){}
-    , decltype(_impl_.value_){}
+      decltype(_impl_.status_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  ::memcpy(&_impl_.rows_, &from._impl_.rows_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.value_) -
-    reinterpret_cast<char*>(&_impl_.rows_)) + sizeof(_impl_.value_));
+  _this->_impl_.status_ = from._impl_.status_;
   // @@protoc_insertion_point(copy_constructor:gRPC_stream.GetMatRequest)
 }
 
@@ -456,10 +444,7 @@ inline void GetMatRequest::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.rows_){0}
-    , decltype(_impl_.cols_){0}
-    , decltype(_impl_.elt_type_){0}
-    , decltype(_impl_.value_){0}
+      decltype(_impl_.status_){false}
     , /*decltype(_impl_._cached_size_)*/{}
   };
 }
@@ -487,9 +472,7 @@ void GetMatRequest::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  ::memset(&_impl_.rows_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.value_) -
-      reinterpret_cast<char*>(&_impl_.rows_)) + sizeof(_impl_.value_));
+  _impl_.status_ = false;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -499,34 +482,10 @@ const char* GetMatRequest::_InternalParse(const char* ptr, ::_pbi::ParseContext*
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // int32 rows = 1;
+      // bool status = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-          _impl_.rows_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // int32 cols = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          _impl_.cols_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // int32 elt_type = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
-          _impl_.elt_type_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // int32 value = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 32)) {
-          _impl_.value_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          _impl_.status_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -560,28 +519,10 @@ uint8_t* GetMatRequest::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int32 rows = 1;
-  if (this->_internal_rows() != 0) {
+  // bool status = 1;
+  if (this->_internal_status() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(1, this->_internal_rows(), target);
-  }
-
-  // int32 cols = 2;
-  if (this->_internal_cols() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(2, this->_internal_cols(), target);
-  }
-
-  // int32 elt_type = 3;
-  if (this->_internal_elt_type() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(3, this->_internal_elt_type(), target);
-  }
-
-  // int32 value = 4;
-  if (this->_internal_value() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(4, this->_internal_value(), target);
+    target = ::_pbi::WireFormatLite::WriteBoolToArray(1, this->_internal_status(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -600,24 +541,9 @@ size_t GetMatRequest::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // int32 rows = 1;
-  if (this->_internal_rows() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_rows());
-  }
-
-  // int32 cols = 2;
-  if (this->_internal_cols() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_cols());
-  }
-
-  // int32 elt_type = 3;
-  if (this->_internal_elt_type() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_elt_type());
-  }
-
-  // int32 value = 4;
-  if (this->_internal_value() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_value());
+  // bool status = 1;
+  if (this->_internal_status() != 0) {
+    total_size += 1 + 1;
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -638,17 +564,8 @@ void GetMatRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from._internal_rows() != 0) {
-    _this->_internal_set_rows(from._internal_rows());
-  }
-  if (from._internal_cols() != 0) {
-    _this->_internal_set_cols(from._internal_cols());
-  }
-  if (from._internal_elt_type() != 0) {
-    _this->_internal_set_elt_type(from._internal_elt_type());
-  }
-  if (from._internal_value() != 0) {
-    _this->_internal_set_value(from._internal_value());
+  if (from._internal_status() != 0) {
+    _this->_internal_set_status(from._internal_status());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -667,12 +584,7 @@ bool GetMatRequest::IsInitialized() const {
 void GetMatRequest::InternalSwap(GetMatRequest* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(GetMatRequest, _impl_.value_)
-      + sizeof(GetMatRequest::_impl_.value_)
-      - PROTOBUF_FIELD_OFFSET(GetMatRequest, _impl_.rows_)>(
-          reinterpret_cast<char*>(&_impl_.rows_),
-          reinterpret_cast<char*>(&other->_impl_.rows_));
+  swap(_impl_.status_, other->_impl_.status_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata GetMatRequest::GetMetadata() const {
