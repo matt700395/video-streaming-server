@@ -12,6 +12,6 @@ message OcvMat {
 }
 
 service StreamService {
-    // Bidirectional streaming method to send video frames.
-    rpc SendStream(stream OcvMat) returns (stream google.protobuf.Empty) {}
+    // Returns the current state of the global Mat variable.
+    rpc GetMat(google.protobuf.Empty) returns (OcvMat) {}
 }
