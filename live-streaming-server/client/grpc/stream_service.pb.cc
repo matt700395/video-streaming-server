@@ -20,7 +20,7 @@ PROTOBUF_PRAGMA_INIT_SEG
 namespace _pb = ::PROTOBUF_NAMESPACE_ID;
 namespace _pbi = _pb::internal;
 
-namespace opencv {
+namespace gRPC_stream {
 PROTOBUF_CONSTEXPR OcvMat::OcvMat(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.mat_data_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
@@ -66,65 +66,66 @@ struct GetMatResponseDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 GetMatResponseDefaultTypeInternal _GetMatResponse_default_instance_;
-}  // namespace opencv
+}  // namespace gRPC_stream
 static ::_pb::Metadata file_level_metadata_stream_5fservice_2eproto[3];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_stream_5fservice_2eproto = nullptr;
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_stream_5fservice_2eproto = nullptr;
 
 const uint32_t TableStruct_stream_5fservice_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::opencv::OcvMat, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::gRPC_stream::OcvMat, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::opencv::OcvMat, _impl_.rows_),
-  PROTOBUF_FIELD_OFFSET(::opencv::OcvMat, _impl_.cols_),
-  PROTOBUF_FIELD_OFFSET(::opencv::OcvMat, _impl_.elt_type_),
-  PROTOBUF_FIELD_OFFSET(::opencv::OcvMat, _impl_.mat_data_),
+  PROTOBUF_FIELD_OFFSET(::gRPC_stream::OcvMat, _impl_.rows_),
+  PROTOBUF_FIELD_OFFSET(::gRPC_stream::OcvMat, _impl_.cols_),
+  PROTOBUF_FIELD_OFFSET(::gRPC_stream::OcvMat, _impl_.elt_type_),
+  PROTOBUF_FIELD_OFFSET(::gRPC_stream::OcvMat, _impl_.mat_data_),
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::opencv::GetMatRequest, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::gRPC_stream::GetMatRequest, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::opencv::GetMatRequest, _impl_.rows_),
-  PROTOBUF_FIELD_OFFSET(::opencv::GetMatRequest, _impl_.cols_),
-  PROTOBUF_FIELD_OFFSET(::opencv::GetMatRequest, _impl_.elt_type_),
-  PROTOBUF_FIELD_OFFSET(::opencv::GetMatRequest, _impl_.value_),
+  PROTOBUF_FIELD_OFFSET(::gRPC_stream::GetMatRequest, _impl_.rows_),
+  PROTOBUF_FIELD_OFFSET(::gRPC_stream::GetMatRequest, _impl_.cols_),
+  PROTOBUF_FIELD_OFFSET(::gRPC_stream::GetMatRequest, _impl_.elt_type_),
+  PROTOBUF_FIELD_OFFSET(::gRPC_stream::GetMatRequest, _impl_.value_),
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::opencv::GetMatResponse, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::gRPC_stream::GetMatResponse, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::opencv::GetMatResponse, _impl_.mat_),
+  PROTOBUF_FIELD_OFFSET(::gRPC_stream::GetMatResponse, _impl_.mat_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, -1, sizeof(::opencv::OcvMat)},
-  { 10, -1, -1, sizeof(::opencv::GetMatRequest)},
-  { 20, -1, -1, sizeof(::opencv::GetMatResponse)},
+  { 0, -1, -1, sizeof(::gRPC_stream::OcvMat)},
+  { 10, -1, -1, sizeof(::gRPC_stream::GetMatRequest)},
+  { 20, -1, -1, sizeof(::gRPC_stream::GetMatResponse)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
-  &::opencv::_OcvMat_default_instance_._instance,
-  &::opencv::_GetMatRequest_default_instance_._instance,
-  &::opencv::_GetMatResponse_default_instance_._instance,
+  &::gRPC_stream::_OcvMat_default_instance_._instance,
+  &::gRPC_stream::_GetMatRequest_default_instance_._instance,
+  &::gRPC_stream::_GetMatResponse_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_stream_5fservice_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\024stream_service.proto\022\006opencv\"H\n\006OcvMat"
-  "\022\014\n\004rows\030\001 \001(\005\022\014\n\004cols\030\002 \001(\005\022\020\n\010elt_type"
-  "\030\003 \001(\005\022\020\n\010mat_data\030\004 \001(\014\"L\n\rGetMatReques"
-  "t\022\014\n\004rows\030\001 \001(\005\022\014\n\004cols\030\002 \001(\005\022\020\n\010elt_typ"
-  "e\030\003 \001(\005\022\r\n\005value\030\004 \001(\005\"-\n\016GetMatResponse"
-  "\022\033\n\003mat\030\001 \001(\0132\016.opencv.OcvMat2L\n\rStreamS"
-  "ervice\022;\n\006GetMat\022\025.opencv.GetMatRequest\032"
-  "\026.opencv.GetMatResponse\"\0000\001b\006proto3"
+  "\n\024stream_service.proto\022\013gRPC_stream\"H\n\006O"
+  "cvMat\022\014\n\004rows\030\001 \001(\005\022\014\n\004cols\030\002 \001(\005\022\020\n\010elt"
+  "_type\030\003 \001(\005\022\020\n\010mat_data\030\004 \001(\014\"L\n\rGetMatR"
+  "equest\022\014\n\004rows\030\001 \001(\005\022\014\n\004cols\030\002 \001(\005\022\020\n\010el"
+  "t_type\030\003 \001(\005\022\r\n\005value\030\004 \001(\005\"2\n\016GetMatRes"
+  "ponse\022 \n\003mat\030\001 \001(\0132\023.gRPC_stream.OcvMat2"
+  "V\n\rStreamService\022E\n\006GetMat\022\032.gRPC_stream"
+  ".GetMatRequest\032\033.gRPC_stream.GetMatRespo"
+  "nse\"\0000\001b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_stream_5fservice_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_stream_5fservice_2eproto = {
-    false, false, 315, descriptor_table_protodef_stream_5fservice_2eproto,
+    false, false, 335, descriptor_table_protodef_stream_5fservice_2eproto,
     "stream_service.proto",
     &descriptor_table_stream_5fservice_2eproto_once, nullptr, 0, 3,
     schemas, file_default_instances, TableStruct_stream_5fservice_2eproto::offsets,
@@ -137,7 +138,7 @@ PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_stream_5
 
 // Force running AddDescriptors() at dynamic initialization time.
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_stream_5fservice_2eproto(&descriptor_table_stream_5fservice_2eproto);
-namespace opencv {
+namespace gRPC_stream {
 
 // ===================================================================
 
@@ -149,7 +150,7 @@ OcvMat::OcvMat(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:opencv.OcvMat)
+  // @@protoc_insertion_point(arena_constructor:gRPC_stream.OcvMat)
 }
 OcvMat::OcvMat(const OcvMat& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
@@ -173,7 +174,7 @@ OcvMat::OcvMat(const OcvMat& from)
   ::memcpy(&_impl_.rows_, &from._impl_.rows_,
     static_cast<size_t>(reinterpret_cast<char*>(&_impl_.elt_type_) -
     reinterpret_cast<char*>(&_impl_.rows_)) + sizeof(_impl_.elt_type_));
-  // @@protoc_insertion_point(copy_constructor:opencv.OcvMat)
+  // @@protoc_insertion_point(copy_constructor:gRPC_stream.OcvMat)
 }
 
 inline void OcvMat::SharedCtor(
@@ -194,7 +195,7 @@ inline void OcvMat::SharedCtor(
 }
 
 OcvMat::~OcvMat() {
-  // @@protoc_insertion_point(destructor:opencv.OcvMat)
+  // @@protoc_insertion_point(destructor:gRPC_stream.OcvMat)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -212,7 +213,7 @@ void OcvMat::SetCachedSize(int size) const {
 }
 
 void OcvMat::Clear() {
-// @@protoc_insertion_point(message_clear_start:opencv.OcvMat)
+// @@protoc_insertion_point(message_clear_start:gRPC_stream.OcvMat)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -288,7 +289,7 @@ failure:
 
 uint8_t* OcvMat::_InternalSerialize(
     uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:opencv.OcvMat)
+  // @@protoc_insertion_point(serialize_to_array_start:gRPC_stream.OcvMat)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -320,12 +321,12 @@ uint8_t* OcvMat::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:opencv.OcvMat)
+  // @@protoc_insertion_point(serialize_to_array_end:gRPC_stream.OcvMat)
   return target;
 }
 
 size_t OcvMat::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:opencv.OcvMat)
+// @@protoc_insertion_point(message_byte_size_start:gRPC_stream.OcvMat)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
@@ -367,7 +368,7 @@ const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*OcvMat::GetClassData() const {
 void OcvMat::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<OcvMat*>(&to_msg);
   auto& from = static_cast<const OcvMat&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:opencv.OcvMat)
+  // @@protoc_insertion_point(class_specific_merge_from_start:gRPC_stream.OcvMat)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -388,7 +389,7 @@ void OcvMat::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBU
 }
 
 void OcvMat::CopyFrom(const OcvMat& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:opencv.OcvMat)
+// @@protoc_insertion_point(class_specific_copy_from_start:gRPC_stream.OcvMat)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -431,7 +432,7 @@ GetMatRequest::GetMatRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:opencv.GetMatRequest)
+  // @@protoc_insertion_point(arena_constructor:gRPC_stream.GetMatRequest)
 }
 GetMatRequest::GetMatRequest(const GetMatRequest& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
@@ -447,7 +448,7 @@ GetMatRequest::GetMatRequest(const GetMatRequest& from)
   ::memcpy(&_impl_.rows_, &from._impl_.rows_,
     static_cast<size_t>(reinterpret_cast<char*>(&_impl_.value_) -
     reinterpret_cast<char*>(&_impl_.rows_)) + sizeof(_impl_.value_));
-  // @@protoc_insertion_point(copy_constructor:opencv.GetMatRequest)
+  // @@protoc_insertion_point(copy_constructor:gRPC_stream.GetMatRequest)
 }
 
 inline void GetMatRequest::SharedCtor(
@@ -464,7 +465,7 @@ inline void GetMatRequest::SharedCtor(
 }
 
 GetMatRequest::~GetMatRequest() {
-  // @@protoc_insertion_point(destructor:opencv.GetMatRequest)
+  // @@protoc_insertion_point(destructor:gRPC_stream.GetMatRequest)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -481,7 +482,7 @@ void GetMatRequest::SetCachedSize(int size) const {
 }
 
 void GetMatRequest::Clear() {
-// @@protoc_insertion_point(message_clear_start:opencv.GetMatRequest)
+// @@protoc_insertion_point(message_clear_start:gRPC_stream.GetMatRequest)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -555,7 +556,7 @@ failure:
 
 uint8_t* GetMatRequest::_InternalSerialize(
     uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:opencv.GetMatRequest)
+  // @@protoc_insertion_point(serialize_to_array_start:gRPC_stream.GetMatRequest)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -587,12 +588,12 @@ uint8_t* GetMatRequest::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:opencv.GetMatRequest)
+  // @@protoc_insertion_point(serialize_to_array_end:gRPC_stream.GetMatRequest)
   return target;
 }
 
 size_t GetMatRequest::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:opencv.GetMatRequest)
+// @@protoc_insertion_point(message_byte_size_start:gRPC_stream.GetMatRequest)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
@@ -632,7 +633,7 @@ const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetMatRequest::GetClassData() 
 void GetMatRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<GetMatRequest*>(&to_msg);
   auto& from = static_cast<const GetMatRequest&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:opencv.GetMatRequest)
+  // @@protoc_insertion_point(class_specific_merge_from_start:gRPC_stream.GetMatRequest)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -653,7 +654,7 @@ void GetMatRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::
 }
 
 void GetMatRequest::CopyFrom(const GetMatRequest& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:opencv.GetMatRequest)
+// @@protoc_insertion_point(class_specific_copy_from_start:gRPC_stream.GetMatRequest)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -684,10 +685,10 @@ void GetMatRequest::InternalSwap(GetMatRequest* other) {
 
 class GetMatResponse::_Internal {
  public:
-  static const ::opencv::OcvMat& mat(const GetMatResponse* msg);
+  static const ::gRPC_stream::OcvMat& mat(const GetMatResponse* msg);
 };
 
-const ::opencv::OcvMat&
+const ::gRPC_stream::OcvMat&
 GetMatResponse::_Internal::mat(const GetMatResponse* msg) {
   return *msg->_impl_.mat_;
 }
@@ -695,7 +696,7 @@ GetMatResponse::GetMatResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:opencv.GetMatResponse)
+  // @@protoc_insertion_point(arena_constructor:gRPC_stream.GetMatResponse)
 }
 GetMatResponse::GetMatResponse(const GetMatResponse& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
@@ -706,9 +707,9 @@ GetMatResponse::GetMatResponse(const GetMatResponse& from)
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   if (from._internal_has_mat()) {
-    _this->_impl_.mat_ = new ::opencv::OcvMat(*from._impl_.mat_);
+    _this->_impl_.mat_ = new ::gRPC_stream::OcvMat(*from._impl_.mat_);
   }
-  // @@protoc_insertion_point(copy_constructor:opencv.GetMatResponse)
+  // @@protoc_insertion_point(copy_constructor:gRPC_stream.GetMatResponse)
 }
 
 inline void GetMatResponse::SharedCtor(
@@ -722,7 +723,7 @@ inline void GetMatResponse::SharedCtor(
 }
 
 GetMatResponse::~GetMatResponse() {
-  // @@protoc_insertion_point(destructor:opencv.GetMatResponse)
+  // @@protoc_insertion_point(destructor:gRPC_stream.GetMatResponse)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -740,7 +741,7 @@ void GetMatResponse::SetCachedSize(int size) const {
 }
 
 void GetMatResponse::Clear() {
-// @@protoc_insertion_point(message_clear_start:opencv.GetMatResponse)
+// @@protoc_insertion_point(message_clear_start:gRPC_stream.GetMatResponse)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -758,7 +759,7 @@ const char* GetMatResponse::_InternalParse(const char* ptr, ::_pbi::ParseContext
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // .opencv.OcvMat mat = 1;
+      // .gRPC_stream.OcvMat mat = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           ptr = ctx->ParseMessage(_internal_mutable_mat(), ptr);
@@ -791,11 +792,11 @@ failure:
 
 uint8_t* GetMatResponse::_InternalSerialize(
     uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:opencv.GetMatResponse)
+  // @@protoc_insertion_point(serialize_to_array_start:gRPC_stream.GetMatResponse)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .opencv.OcvMat mat = 1;
+  // .gRPC_stream.OcvMat mat = 1;
   if (this->_internal_has_mat()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(1, _Internal::mat(this),
@@ -806,19 +807,19 @@ uint8_t* GetMatResponse::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:opencv.GetMatResponse)
+  // @@protoc_insertion_point(serialize_to_array_end:gRPC_stream.GetMatResponse)
   return target;
 }
 
 size_t GetMatResponse::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:opencv.GetMatResponse)
+// @@protoc_insertion_point(message_byte_size_start:gRPC_stream.GetMatResponse)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .opencv.OcvMat mat = 1;
+  // .gRPC_stream.OcvMat mat = 1;
   if (this->_internal_has_mat()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
@@ -838,20 +839,20 @@ const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetMatResponse::GetClassData()
 void GetMatResponse::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<GetMatResponse*>(&to_msg);
   auto& from = static_cast<const GetMatResponse&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:opencv.GetMatResponse)
+  // @@protoc_insertion_point(class_specific_merge_from_start:gRPC_stream.GetMatResponse)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
   if (from._internal_has_mat()) {
-    _this->_internal_mutable_mat()->::opencv::OcvMat::MergeFrom(
+    _this->_internal_mutable_mat()->::gRPC_stream::OcvMat::MergeFrom(
         from._internal_mat());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void GetMatResponse::CopyFrom(const GetMatResponse& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:opencv.GetMatResponse)
+// @@protoc_insertion_point(class_specific_copy_from_start:gRPC_stream.GetMatResponse)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -874,19 +875,19 @@ void GetMatResponse::InternalSwap(GetMatResponse* other) {
 }
 
 // @@protoc_insertion_point(namespace_scope)
-}  // namespace opencv
+}  // namespace gRPC_stream
 PROTOBUF_NAMESPACE_OPEN
-template<> PROTOBUF_NOINLINE ::opencv::OcvMat*
-Arena::CreateMaybeMessage< ::opencv::OcvMat >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::opencv::OcvMat >(arena);
+template<> PROTOBUF_NOINLINE ::gRPC_stream::OcvMat*
+Arena::CreateMaybeMessage< ::gRPC_stream::OcvMat >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::gRPC_stream::OcvMat >(arena);
 }
-template<> PROTOBUF_NOINLINE ::opencv::GetMatRequest*
-Arena::CreateMaybeMessage< ::opencv::GetMatRequest >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::opencv::GetMatRequest >(arena);
+template<> PROTOBUF_NOINLINE ::gRPC_stream::GetMatRequest*
+Arena::CreateMaybeMessage< ::gRPC_stream::GetMatRequest >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::gRPC_stream::GetMatRequest >(arena);
 }
-template<> PROTOBUF_NOINLINE ::opencv::GetMatResponse*
-Arena::CreateMaybeMessage< ::opencv::GetMatResponse >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::opencv::GetMatResponse >(arena);
+template<> PROTOBUF_NOINLINE ::gRPC_stream::GetMatResponse*
+Arena::CreateMaybeMessage< ::gRPC_stream::GetMatResponse >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::gRPC_stream::GetMatResponse >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

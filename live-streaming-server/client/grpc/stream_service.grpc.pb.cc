@@ -19,10 +19,10 @@
 #include <grpcpp/server_context.h>
 #include <grpcpp/impl/service_type.h>
 #include <grpcpp/support/sync_stream.h>
-namespace opencv {
+namespace gRPC_stream {
 
 static const char* StreamService_method_names[] = {
-  "/opencv.StreamService/GetMat",
+  "/gRPC_stream.StreamService/GetMat",
 };
 
 std::unique_ptr< StreamService::Stub> StreamService::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
@@ -35,31 +35,31 @@ StreamService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& chan
   : channel_(channel), rpcmethod_GetMat_(StreamService_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::SERVER_STREAMING, channel)
   {}
 
-::grpc::ClientReader< ::opencv::GetMatResponse>* StreamService::Stub::GetMatRaw(::grpc::ClientContext* context, const ::opencv::GetMatRequest& request) {
-  return ::grpc::internal::ClientReaderFactory< ::opencv::GetMatResponse>::Create(channel_.get(), rpcmethod_GetMat_, context, request);
+::grpc::ClientReader< ::gRPC_stream::GetMatResponse>* StreamService::Stub::GetMatRaw(::grpc::ClientContext* context, const ::gRPC_stream::GetMatRequest& request) {
+  return ::grpc::internal::ClientReaderFactory< ::gRPC_stream::GetMatResponse>::Create(channel_.get(), rpcmethod_GetMat_, context, request);
 }
 
-void StreamService::Stub::async::GetMat(::grpc::ClientContext* context, const ::opencv::GetMatRequest* request, ::grpc::ClientReadReactor< ::opencv::GetMatResponse>* reactor) {
-  ::grpc::internal::ClientCallbackReaderFactory< ::opencv::GetMatResponse>::Create(stub_->channel_.get(), stub_->rpcmethod_GetMat_, context, request, reactor);
+void StreamService::Stub::async::GetMat(::grpc::ClientContext* context, const ::gRPC_stream::GetMatRequest* request, ::grpc::ClientReadReactor< ::gRPC_stream::GetMatResponse>* reactor) {
+  ::grpc::internal::ClientCallbackReaderFactory< ::gRPC_stream::GetMatResponse>::Create(stub_->channel_.get(), stub_->rpcmethod_GetMat_, context, request, reactor);
 }
 
-::grpc::ClientAsyncReader< ::opencv::GetMatResponse>* StreamService::Stub::AsyncGetMatRaw(::grpc::ClientContext* context, const ::opencv::GetMatRequest& request, ::grpc::CompletionQueue* cq, void* tag) {
-  return ::grpc::internal::ClientAsyncReaderFactory< ::opencv::GetMatResponse>::Create(channel_.get(), cq, rpcmethod_GetMat_, context, request, true, tag);
+::grpc::ClientAsyncReader< ::gRPC_stream::GetMatResponse>* StreamService::Stub::AsyncGetMatRaw(::grpc::ClientContext* context, const ::gRPC_stream::GetMatRequest& request, ::grpc::CompletionQueue* cq, void* tag) {
+  return ::grpc::internal::ClientAsyncReaderFactory< ::gRPC_stream::GetMatResponse>::Create(channel_.get(), cq, rpcmethod_GetMat_, context, request, true, tag);
 }
 
-::grpc::ClientAsyncReader< ::opencv::GetMatResponse>* StreamService::Stub::PrepareAsyncGetMatRaw(::grpc::ClientContext* context, const ::opencv::GetMatRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncReaderFactory< ::opencv::GetMatResponse>::Create(channel_.get(), cq, rpcmethod_GetMat_, context, request, false, nullptr);
+::grpc::ClientAsyncReader< ::gRPC_stream::GetMatResponse>* StreamService::Stub::PrepareAsyncGetMatRaw(::grpc::ClientContext* context, const ::gRPC_stream::GetMatRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncReaderFactory< ::gRPC_stream::GetMatResponse>::Create(channel_.get(), cq, rpcmethod_GetMat_, context, request, false, nullptr);
 }
 
 StreamService::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       StreamService_method_names[0],
       ::grpc::internal::RpcMethod::SERVER_STREAMING,
-      new ::grpc::internal::ServerStreamingHandler< StreamService::Service, ::opencv::GetMatRequest, ::opencv::GetMatResponse>(
+      new ::grpc::internal::ServerStreamingHandler< StreamService::Service, ::gRPC_stream::GetMatRequest, ::gRPC_stream::GetMatResponse>(
           [](StreamService::Service* service,
              ::grpc::ServerContext* ctx,
-             const ::opencv::GetMatRequest* req,
-             ::grpc::ServerWriter<::opencv::GetMatResponse>* writer) {
+             const ::gRPC_stream::GetMatRequest* req,
+             ::grpc::ServerWriter<::gRPC_stream::GetMatResponse>* writer) {
                return service->GetMat(ctx, req, writer);
              }, this)));
 }
@@ -67,7 +67,7 @@ StreamService::Service::Service() {
 StreamService::Service::~Service() {
 }
 
-::grpc::Status StreamService::Service::GetMat(::grpc::ServerContext* context, const ::opencv::GetMatRequest* request, ::grpc::ServerWriter< ::opencv::GetMatResponse>* writer) {
+::grpc::Status StreamService::Service::GetMat(::grpc::ServerContext* context, const ::gRPC_stream::GetMatRequest* request, ::grpc::ServerWriter< ::gRPC_stream::GetMatResponse>* writer) {
   (void) context;
   (void) request;
   (void) writer;
@@ -75,5 +75,5 @@ StreamService::Service::~Service() {
 }
 
 
-}  // namespace opencv
+}  // namespace gRPC_stream
 

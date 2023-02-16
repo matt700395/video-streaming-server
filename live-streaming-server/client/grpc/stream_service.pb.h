@@ -44,7 +44,7 @@ struct TableStruct_stream_5fservice_2eproto {
   static const uint32_t offsets[];
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_stream_5fservice_2eproto;
-namespace opencv {
+namespace gRPC_stream {
 class GetMatRequest;
 struct GetMatRequestDefaultTypeInternal;
 extern GetMatRequestDefaultTypeInternal _GetMatRequest_default_instance_;
@@ -54,18 +54,18 @@ extern GetMatResponseDefaultTypeInternal _GetMatResponse_default_instance_;
 class OcvMat;
 struct OcvMatDefaultTypeInternal;
 extern OcvMatDefaultTypeInternal _OcvMat_default_instance_;
-}  // namespace opencv
+}  // namespace gRPC_stream
 PROTOBUF_NAMESPACE_OPEN
-template<> ::opencv::GetMatRequest* Arena::CreateMaybeMessage<::opencv::GetMatRequest>(Arena*);
-template<> ::opencv::GetMatResponse* Arena::CreateMaybeMessage<::opencv::GetMatResponse>(Arena*);
-template<> ::opencv::OcvMat* Arena::CreateMaybeMessage<::opencv::OcvMat>(Arena*);
+template<> ::gRPC_stream::GetMatRequest* Arena::CreateMaybeMessage<::gRPC_stream::GetMatRequest>(Arena*);
+template<> ::gRPC_stream::GetMatResponse* Arena::CreateMaybeMessage<::gRPC_stream::GetMatResponse>(Arena*);
+template<> ::gRPC_stream::OcvMat* Arena::CreateMaybeMessage<::gRPC_stream::OcvMat>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
-namespace opencv {
+namespace gRPC_stream {
 
 // ===================================================================
 
 class OcvMat final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:opencv.OcvMat) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:gRPC_stream.OcvMat) */ {
  public:
   inline OcvMat() : OcvMat(nullptr) {}
   ~OcvMat() override;
@@ -168,7 +168,7 @@ class OcvMat final :
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "opencv.OcvMat";
+    return "gRPC_stream.OcvMat";
   }
   protected:
   explicit OcvMat(::PROTOBUF_NAMESPACE_ID::Arena* arena,
@@ -231,7 +231,7 @@ class OcvMat final :
   void _internal_set_elt_type(int32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:opencv.OcvMat)
+  // @@protoc_insertion_point(class_scope:gRPC_stream.OcvMat)
  private:
   class _Internal;
 
@@ -251,7 +251,7 @@ class OcvMat final :
 // -------------------------------------------------------------------
 
 class GetMatRequest final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:opencv.GetMatRequest) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:gRPC_stream.GetMatRequest) */ {
  public:
   inline GetMatRequest() : GetMatRequest(nullptr) {}
   ~GetMatRequest() override;
@@ -354,7 +354,7 @@ class GetMatRequest final :
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "opencv.GetMatRequest";
+    return "gRPC_stream.GetMatRequest";
   }
   protected:
   explicit GetMatRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
@@ -412,7 +412,7 @@ class GetMatRequest final :
   void _internal_set_value(int32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:opencv.GetMatRequest)
+  // @@protoc_insertion_point(class_scope:gRPC_stream.GetMatRequest)
  private:
   class _Internal;
 
@@ -432,7 +432,7 @@ class GetMatRequest final :
 // -------------------------------------------------------------------
 
 class GetMatResponse final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:opencv.GetMatResponse) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:gRPC_stream.GetMatResponse) */ {
  public:
   inline GetMatResponse() : GetMatResponse(nullptr) {}
   ~GetMatResponse() override;
@@ -535,7 +535,7 @@ class GetMatResponse final :
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "opencv.GetMatResponse";
+    return "gRPC_stream.GetMatResponse";
   }
   protected:
   explicit GetMatResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
@@ -554,25 +554,25 @@ class GetMatResponse final :
   enum : int {
     kMatFieldNumber = 1,
   };
-  // .opencv.OcvMat mat = 1;
+  // .gRPC_stream.OcvMat mat = 1;
   bool has_mat() const;
   private:
   bool _internal_has_mat() const;
   public:
   void clear_mat();
-  const ::opencv::OcvMat& mat() const;
-  PROTOBUF_NODISCARD ::opencv::OcvMat* release_mat();
-  ::opencv::OcvMat* mutable_mat();
-  void set_allocated_mat(::opencv::OcvMat* mat);
+  const ::gRPC_stream::OcvMat& mat() const;
+  PROTOBUF_NODISCARD ::gRPC_stream::OcvMat* release_mat();
+  ::gRPC_stream::OcvMat* mutable_mat();
+  void set_allocated_mat(::gRPC_stream::OcvMat* mat);
   private:
-  const ::opencv::OcvMat& _internal_mat() const;
-  ::opencv::OcvMat* _internal_mutable_mat();
+  const ::gRPC_stream::OcvMat& _internal_mat() const;
+  ::gRPC_stream::OcvMat* _internal_mutable_mat();
   public:
   void unsafe_arena_set_allocated_mat(
-      ::opencv::OcvMat* mat);
-  ::opencv::OcvMat* unsafe_arena_release_mat();
+      ::gRPC_stream::OcvMat* mat);
+  ::gRPC_stream::OcvMat* unsafe_arena_release_mat();
 
-  // @@protoc_insertion_point(class_scope:opencv.GetMatResponse)
+  // @@protoc_insertion_point(class_scope:gRPC_stream.GetMatResponse)
  private:
   class _Internal;
 
@@ -580,7 +580,7 @@ class GetMatResponse final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::opencv::OcvMat* mat_;
+    ::gRPC_stream::OcvMat* mat_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -605,7 +605,7 @@ inline int32_t OcvMat::_internal_rows() const {
   return _impl_.rows_;
 }
 inline int32_t OcvMat::rows() const {
-  // @@protoc_insertion_point(field_get:opencv.OcvMat.rows)
+  // @@protoc_insertion_point(field_get:gRPC_stream.OcvMat.rows)
   return _internal_rows();
 }
 inline void OcvMat::_internal_set_rows(int32_t value) {
@@ -614,7 +614,7 @@ inline void OcvMat::_internal_set_rows(int32_t value) {
 }
 inline void OcvMat::set_rows(int32_t value) {
   _internal_set_rows(value);
-  // @@protoc_insertion_point(field_set:opencv.OcvMat.rows)
+  // @@protoc_insertion_point(field_set:gRPC_stream.OcvMat.rows)
 }
 
 // int32 cols = 2;
@@ -625,7 +625,7 @@ inline int32_t OcvMat::_internal_cols() const {
   return _impl_.cols_;
 }
 inline int32_t OcvMat::cols() const {
-  // @@protoc_insertion_point(field_get:opencv.OcvMat.cols)
+  // @@protoc_insertion_point(field_get:gRPC_stream.OcvMat.cols)
   return _internal_cols();
 }
 inline void OcvMat::_internal_set_cols(int32_t value) {
@@ -634,7 +634,7 @@ inline void OcvMat::_internal_set_cols(int32_t value) {
 }
 inline void OcvMat::set_cols(int32_t value) {
   _internal_set_cols(value);
-  // @@protoc_insertion_point(field_set:opencv.OcvMat.cols)
+  // @@protoc_insertion_point(field_set:gRPC_stream.OcvMat.cols)
 }
 
 // int32 elt_type = 3;
@@ -645,7 +645,7 @@ inline int32_t OcvMat::_internal_elt_type() const {
   return _impl_.elt_type_;
 }
 inline int32_t OcvMat::elt_type() const {
-  // @@protoc_insertion_point(field_get:opencv.OcvMat.elt_type)
+  // @@protoc_insertion_point(field_get:gRPC_stream.OcvMat.elt_type)
   return _internal_elt_type();
 }
 inline void OcvMat::_internal_set_elt_type(int32_t value) {
@@ -654,7 +654,7 @@ inline void OcvMat::_internal_set_elt_type(int32_t value) {
 }
 inline void OcvMat::set_elt_type(int32_t value) {
   _internal_set_elt_type(value);
-  // @@protoc_insertion_point(field_set:opencv.OcvMat.elt_type)
+  // @@protoc_insertion_point(field_set:gRPC_stream.OcvMat.elt_type)
 }
 
 // bytes mat_data = 4;
@@ -662,7 +662,7 @@ inline void OcvMat::clear_mat_data() {
   _impl_.mat_data_.ClearToEmpty();
 }
 inline const std::string& OcvMat::mat_data() const {
-  // @@protoc_insertion_point(field_get:opencv.OcvMat.mat_data)
+  // @@protoc_insertion_point(field_get:gRPC_stream.OcvMat.mat_data)
   return _internal_mat_data();
 }
 template <typename ArgT0, typename... ArgT>
@@ -670,11 +670,11 @@ inline PROTOBUF_ALWAYS_INLINE
 void OcvMat::set_mat_data(ArgT0&& arg0, ArgT... args) {
  
  _impl_.mat_data_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:opencv.OcvMat.mat_data)
+  // @@protoc_insertion_point(field_set:gRPC_stream.OcvMat.mat_data)
 }
 inline std::string* OcvMat::mutable_mat_data() {
   std::string* _s = _internal_mutable_mat_data();
-  // @@protoc_insertion_point(field_mutable:opencv.OcvMat.mat_data)
+  // @@protoc_insertion_point(field_mutable:gRPC_stream.OcvMat.mat_data)
   return _s;
 }
 inline const std::string& OcvMat::_internal_mat_data() const {
@@ -689,7 +689,7 @@ inline std::string* OcvMat::_internal_mutable_mat_data() {
   return _impl_.mat_data_.Mutable(GetArenaForAllocation());
 }
 inline std::string* OcvMat::release_mat_data() {
-  // @@protoc_insertion_point(field_release:opencv.OcvMat.mat_data)
+  // @@protoc_insertion_point(field_release:gRPC_stream.OcvMat.mat_data)
   return _impl_.mat_data_.Release();
 }
 inline void OcvMat::set_allocated_mat_data(std::string* mat_data) {
@@ -704,7 +704,7 @@ inline void OcvMat::set_allocated_mat_data(std::string* mat_data) {
     _impl_.mat_data_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:opencv.OcvMat.mat_data)
+  // @@protoc_insertion_point(field_set_allocated:gRPC_stream.OcvMat.mat_data)
 }
 
 // -------------------------------------------------------------------
@@ -719,7 +719,7 @@ inline int32_t GetMatRequest::_internal_rows() const {
   return _impl_.rows_;
 }
 inline int32_t GetMatRequest::rows() const {
-  // @@protoc_insertion_point(field_get:opencv.GetMatRequest.rows)
+  // @@protoc_insertion_point(field_get:gRPC_stream.GetMatRequest.rows)
   return _internal_rows();
 }
 inline void GetMatRequest::_internal_set_rows(int32_t value) {
@@ -728,7 +728,7 @@ inline void GetMatRequest::_internal_set_rows(int32_t value) {
 }
 inline void GetMatRequest::set_rows(int32_t value) {
   _internal_set_rows(value);
-  // @@protoc_insertion_point(field_set:opencv.GetMatRequest.rows)
+  // @@protoc_insertion_point(field_set:gRPC_stream.GetMatRequest.rows)
 }
 
 // int32 cols = 2;
@@ -739,7 +739,7 @@ inline int32_t GetMatRequest::_internal_cols() const {
   return _impl_.cols_;
 }
 inline int32_t GetMatRequest::cols() const {
-  // @@protoc_insertion_point(field_get:opencv.GetMatRequest.cols)
+  // @@protoc_insertion_point(field_get:gRPC_stream.GetMatRequest.cols)
   return _internal_cols();
 }
 inline void GetMatRequest::_internal_set_cols(int32_t value) {
@@ -748,7 +748,7 @@ inline void GetMatRequest::_internal_set_cols(int32_t value) {
 }
 inline void GetMatRequest::set_cols(int32_t value) {
   _internal_set_cols(value);
-  // @@protoc_insertion_point(field_set:opencv.GetMatRequest.cols)
+  // @@protoc_insertion_point(field_set:gRPC_stream.GetMatRequest.cols)
 }
 
 // int32 elt_type = 3;
@@ -759,7 +759,7 @@ inline int32_t GetMatRequest::_internal_elt_type() const {
   return _impl_.elt_type_;
 }
 inline int32_t GetMatRequest::elt_type() const {
-  // @@protoc_insertion_point(field_get:opencv.GetMatRequest.elt_type)
+  // @@protoc_insertion_point(field_get:gRPC_stream.GetMatRequest.elt_type)
   return _internal_elt_type();
 }
 inline void GetMatRequest::_internal_set_elt_type(int32_t value) {
@@ -768,7 +768,7 @@ inline void GetMatRequest::_internal_set_elt_type(int32_t value) {
 }
 inline void GetMatRequest::set_elt_type(int32_t value) {
   _internal_set_elt_type(value);
-  // @@protoc_insertion_point(field_set:opencv.GetMatRequest.elt_type)
+  // @@protoc_insertion_point(field_set:gRPC_stream.GetMatRequest.elt_type)
 }
 
 // int32 value = 4;
@@ -779,7 +779,7 @@ inline int32_t GetMatRequest::_internal_value() const {
   return _impl_.value_;
 }
 inline int32_t GetMatRequest::value() const {
-  // @@protoc_insertion_point(field_get:opencv.GetMatRequest.value)
+  // @@protoc_insertion_point(field_get:gRPC_stream.GetMatRequest.value)
   return _internal_value();
 }
 inline void GetMatRequest::_internal_set_value(int32_t value) {
@@ -788,14 +788,14 @@ inline void GetMatRequest::_internal_set_value(int32_t value) {
 }
 inline void GetMatRequest::set_value(int32_t value) {
   _internal_set_value(value);
-  // @@protoc_insertion_point(field_set:opencv.GetMatRequest.value)
+  // @@protoc_insertion_point(field_set:gRPC_stream.GetMatRequest.value)
 }
 
 // -------------------------------------------------------------------
 
 // GetMatResponse
 
-// .opencv.OcvMat mat = 1;
+// .gRPC_stream.OcvMat mat = 1;
 inline bool GetMatResponse::_internal_has_mat() const {
   return this != internal_default_instance() && _impl_.mat_ != nullptr;
 }
@@ -808,17 +808,17 @@ inline void GetMatResponse::clear_mat() {
   }
   _impl_.mat_ = nullptr;
 }
-inline const ::opencv::OcvMat& GetMatResponse::_internal_mat() const {
-  const ::opencv::OcvMat* p = _impl_.mat_;
-  return p != nullptr ? *p : reinterpret_cast<const ::opencv::OcvMat&>(
-      ::opencv::_OcvMat_default_instance_);
+inline const ::gRPC_stream::OcvMat& GetMatResponse::_internal_mat() const {
+  const ::gRPC_stream::OcvMat* p = _impl_.mat_;
+  return p != nullptr ? *p : reinterpret_cast<const ::gRPC_stream::OcvMat&>(
+      ::gRPC_stream::_OcvMat_default_instance_);
 }
-inline const ::opencv::OcvMat& GetMatResponse::mat() const {
-  // @@protoc_insertion_point(field_get:opencv.GetMatResponse.mat)
+inline const ::gRPC_stream::OcvMat& GetMatResponse::mat() const {
+  // @@protoc_insertion_point(field_get:gRPC_stream.GetMatResponse.mat)
   return _internal_mat();
 }
 inline void GetMatResponse::unsafe_arena_set_allocated_mat(
-    ::opencv::OcvMat* mat) {
+    ::gRPC_stream::OcvMat* mat) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.mat_);
   }
@@ -828,11 +828,11 @@ inline void GetMatResponse::unsafe_arena_set_allocated_mat(
   } else {
     
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:opencv.GetMatResponse.mat)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gRPC_stream.GetMatResponse.mat)
 }
-inline ::opencv::OcvMat* GetMatResponse::release_mat() {
+inline ::gRPC_stream::OcvMat* GetMatResponse::release_mat() {
   
-  ::opencv::OcvMat* temp = _impl_.mat_;
+  ::gRPC_stream::OcvMat* temp = _impl_.mat_;
   _impl_.mat_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
@@ -845,27 +845,27 @@ inline ::opencv::OcvMat* GetMatResponse::release_mat() {
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::opencv::OcvMat* GetMatResponse::unsafe_arena_release_mat() {
-  // @@protoc_insertion_point(field_release:opencv.GetMatResponse.mat)
+inline ::gRPC_stream::OcvMat* GetMatResponse::unsafe_arena_release_mat() {
+  // @@protoc_insertion_point(field_release:gRPC_stream.GetMatResponse.mat)
   
-  ::opencv::OcvMat* temp = _impl_.mat_;
+  ::gRPC_stream::OcvMat* temp = _impl_.mat_;
   _impl_.mat_ = nullptr;
   return temp;
 }
-inline ::opencv::OcvMat* GetMatResponse::_internal_mutable_mat() {
+inline ::gRPC_stream::OcvMat* GetMatResponse::_internal_mutable_mat() {
   
   if (_impl_.mat_ == nullptr) {
-    auto* p = CreateMaybeMessage<::opencv::OcvMat>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::gRPC_stream::OcvMat>(GetArenaForAllocation());
     _impl_.mat_ = p;
   }
   return _impl_.mat_;
 }
-inline ::opencv::OcvMat* GetMatResponse::mutable_mat() {
-  ::opencv::OcvMat* _msg = _internal_mutable_mat();
-  // @@protoc_insertion_point(field_mutable:opencv.GetMatResponse.mat)
+inline ::gRPC_stream::OcvMat* GetMatResponse::mutable_mat() {
+  ::gRPC_stream::OcvMat* _msg = _internal_mutable_mat();
+  // @@protoc_insertion_point(field_mutable:gRPC_stream.GetMatResponse.mat)
   return _msg;
 }
-inline void GetMatResponse::set_allocated_mat(::opencv::OcvMat* mat) {
+inline void GetMatResponse::set_allocated_mat(::gRPC_stream::OcvMat* mat) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete _impl_.mat_;
@@ -882,7 +882,7 @@ inline void GetMatResponse::set_allocated_mat(::opencv::OcvMat* mat) {
     
   }
   _impl_.mat_ = mat;
-  // @@protoc_insertion_point(field_set_allocated:opencv.GetMatResponse.mat)
+  // @@protoc_insertion_point(field_set_allocated:gRPC_stream.GetMatResponse.mat)
 }
 
 #ifdef __GNUC__
@@ -895,7 +895,7 @@ inline void GetMatResponse::set_allocated_mat(::opencv::OcvMat* mat) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace opencv
+}  // namespace gRPC_stream
 
 // @@protoc_insertion_point(global_scope)
 

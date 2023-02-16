@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package opencv;
+package gRPC_stream;
 
 message OcvMat {
     int32 rows = 1;
@@ -9,17 +9,18 @@ message OcvMat {
     bytes mat_data = 4;
 }
 
+
 message GetMatRequest {
-    int32 rows = 1;
-    int32 cols = 2;
-    int32 elt_type = 3;
-    int32 value = 4;
+  int32 rows = 1;
+  int32 cols = 2;
+  int32 elt_type = 3;
+  int32 value = 4;
 }
 
 message GetMatResponse {
-    OcvMat mat = 1;
+  OcvMat mat = 1;
 }
 
 service StreamService {
-    rpc GetMat (GetMatRequest) returns (stream GetMatResponse) {}
+  rpc GetMat (GetMatRequest) returns (stream GetMatResponse) {}
 }

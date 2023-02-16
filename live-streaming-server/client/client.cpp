@@ -1,106 +1,123 @@
-//
-// Created by Alvin Lee on 2023/02/14.
-//
-
-#include "opencv2/opencv.hpp"
 #include <grpcpp/grpcpp.h>
-#include "./grpc/stream_service.pb.h"
+#include <opencv2/core.hpp>
+#include <opencv2/opencv.hpp>
 #include "./grpc/stream_service.grpc.pb.h"
+#include "./grpc/stream_service.pb.h"
+#include <thread>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <sys/ioctl.h>
 
-using namespace cv;
-
-using grpc::Channel;
-using grpc::ClientContext;
+using grpc::Server;
+using grpc::ServerBuilder;
+using grpc::ServerContext;
 using grpc::Status;
-using opencv::OcvMat;
-using opencv::StreamService;
+using gRPC_stream::GetMatRequest;
+using gRPC_stream::GetMatResponse;
+using gRPC_stream::StreamService;
+using gRPC_stream::OcvMat;
 
-class VideoClient {
+// Global variables for the Mat data and synchronization
+cv::Mat g_mat;
+std::mutex g_mat_mutex;
+
+// Implementation of the GetMat method
+class StreamServiceImpl final : public StreamService::Service {
  public:
-  VideoClient(std::shared_ptr<Channel> channel)
-	  : stub_(StreamService::NewStub(channel)) {}
+  Status GetMat(ServerContext* context, const GetMatRequest* request, GetMatResponse* response) {
+	// Lock the mutex before accessing the Mat data
+	g_mat_mutex.lock();
 
-  bool SendStream(const Mat& frame) {
-	OcvMat ocvMat;
-	ocvMat.set_rows(frame.rows);
-	ocvMat.set_cols(frame.cols);
-	ocvMat.set_elt_type(frame.type());
-	ocvMat.set_elt_size(frame.elemSize());
+	// Create and fill a new Mat object from the Mat data
+	cv::Mat mat = g_mat.clone();
 
-	// Assign the data to the proto message
-	ocvMat.set_mat_data(frame.data, frame.total() * frame.elemSize());
+	// Unlock the mutex after accessing the Mat data
+	g_mat_mutex.unlock();
 
-	google::protobuf::Empty empty;
+	// Create an OcvMat message with the Mat data
+	OcvMat ocv_mat;
+	ocv_mat.set_rows(mat.rows);
+	ocv_mat.set_cols(mat.cols);
+	ocv_mat.set_elt_type(mat.type());
+	ocv_mat.set_mat_data(mat.data, mat.total() * mat.elemSize());
 
-	ClientContext context;
-	std::unique_ptr<grpc::ClientReaderWriter<OcvMat, google::protobuf::Empty>> writer(stub_->SendStream(&context));
+	// Set the mat field of the response message to the new OcvMat object
+	response->set_allocated_mat(&ocv_mat);
 
-	writer->Write(ocvMat);
-	writer->WritesDone();
-
-	Status status = writer->Finish();
-
-	return status.ok();
+	return Status::OK;
   }
 
- private:
-  std::unique_ptr<StreamService::Stub> stub_;
 };
 
+// Function to handle the socket communication on a separate thread
+void socket_thread(char* serverIP, int serverPort) {
+  int sokt;
+  struct sockaddr_in serverAddr;
+  socklen_t addrLen = sizeof(struct sockaddr_in);
 
-int main(int argc, char** argv)
-{
-
-  //--------------------------------------------------------
-  //networking stuff: socket , connect
-  //--------------------------------------------------------
-  char*       serverIP;
-  int         serverPort;
-
-  if (argc < 3) {
-	std::cerr << "Usage: cv_video_cli <serverIP> <serverPort> " << std::endl;
-	return -1;
+  if ((sokt = socket(PF_INET, SOCK_STREAM, 0)) < 0) {
+	std::cerr << "socket() failed" << std::endl;
   }
 
-  serverIP   = argv[1];
-  serverPort = atoi(argv[2]);
+  serverAddr.sin_family = PF_INET;
+  serverAddr.sin_addr.s_addr = inet_addr(serverIP);
+  serverAddr.sin_port = htons(serverPort);
 
-  //----------------------------------------------------------
-  //OpenCV Code
-  //----------------------------------------------------------
-
-  VideoClient client(grpc::CreateChannel(
-	  serverIP + std::string(":") + std::to_string(serverPort),
-	  grpc::InsecureChannelCredentials())
-  );
-
-  VideoCapture capture;
-  capture.open(0); // open the default camera
-
-  if (!capture.isOpened()) {
-	std::cerr << "Failed to open camera!" << std::endl;
-	return -1;
+  if (connect(sokt, (sockaddr *) &serverAddr, addrLen) < 0) {
+	std::cerr << "connect() failed!" << std::endl;
   }
 
-  namedWindow("CV Video Client", 1);
+  cv::Mat img;
+  img = cv::Mat::zeros(720, 1280, CV_8UC1);
+  int imgSize = img.total() * img.elemSize();
+  uchar *iptr = img.data;
+  int bytes = 0;
+  int key;
 
-  while (waitKey(10) != 'q') {
+  //make img continuous
+  if (!img.isContinuous()) {
+	img = img.clone();
+  }
 
-	Mat frame;
-	capture >> frame; // get a new frame from camera
+  std::cout << "Image Size:" << imgSize << std::endl;
 
-	if (frame.empty()) {
-	  std::cerr << "Failed to capture frame!" << std::endl;
-	  break;
+  while (key != 'q') {
+	if ((bytes = recv(sokt, iptr, imgSize, MSG_WAITALL)) == -1) {
+	  std::cerr << "recv failed, received bytes = " << bytes << std::endl;
 	}
 
-	if (!client.SendStream(frame)) {
-	  std::cerr << "Failed to send the frame!" << std::endl;
-	  break;
-	}
+	// Lock the mutex before accessing the Mat data
+	g_mat_mutex.lock();
 
-	imshow("CV Video Client", frame);
+	// Copy the received data to the Mat object
+	img.copyTo(g_mat);
+
+	// Unlock the mutex after accessing the Mat data
+	g_mat_mutex.unlock();
+
+	if (key = cv::waitKey(10) >= 0) break;
   }
+
+  close(sokt);
+}
+
+int main(int argc, char** argv) {
+  // Start the socket communication thread
+  std::thread socket_t(socket_thread, argv[1], atoi(argv[2]));
+
+  // Set up the gRPC server on the main thread
+  std::string server_address("0.0.0.0:50051");
+  StreamServiceImpl service;
+  ServerBuilder builder;
+  builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
+  builder.RegisterService(&service);
+  std::unique_ptr<Server> server(builder.BuildAndStart());
+
+  // Wait for the gRPC server to shut down
+  server->Wait();
+
+  // Wait for the socket communication thread to finish
+  socket_t.join();
 
   return 0;
 }
