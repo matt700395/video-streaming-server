@@ -31,7 +31,7 @@ def read_test(video_path, h, w):
     return np.asarray(frames)
 
 # set up the video path and segmentation model
-video_path = '/Users/alvinlee/Git_Folder/car_info/live-streaming-server/ar/data/test_file/test_videos..avi'
+video_path = '/live-streaming-server/data/test_file/test_videos..avi'
 output_path = './result_vid/output_2.avi'
 height = 256
 width = 256
