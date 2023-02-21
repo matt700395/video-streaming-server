@@ -15,7 +15,7 @@ using namespace cv;
 
 void *display(void *);
 
-int capDev = 0;
+int capDev = 1;
 
 VideoCapture cap(capDev); // open the default camera
 
@@ -71,7 +71,7 @@ int main(int argc, char** argv)
   std::cout <<  "Waiting for connections...\n"
 			<<  "Server Port:" << port << std::endl;
 
-  //accept connection from an incoming camera-client
+  //accept connection from an incoming client
   while(1){
 	//if (remoteSocket < 0) {
 	//    perror("accept failed!");
