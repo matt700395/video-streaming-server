@@ -32,7 +32,7 @@ def read_test(video_path, h, w):
 
 # set up the video path and segmentation model
 video_path = '/Users/alvinlee/Git_Folder/car_info/live-streaming-server/ar/data/test_file/test_videos..avi'
-output_path = './result_vid/output.avi'
+output_path = './result_vid/output_2.avi'
 height = 256
 width = 256
 loaded_model = keras.models.load_model("model/seg_weights.h5",
@@ -43,6 +43,8 @@ out = cv2.VideoWriter(output_path, fourcc=fourcc, fps=20, frameSize=(width, heig
 
 # read frames from the video and perform segmentation
 frames = read_test(video_path, height, width)
+img_path = 'galaxy_r.jpeg'
+img_raw = cv2.imread(img_path)
 for i in range(frames.shape[0]):
     frame = frames[i]
     img = np.expand_dims(frame, 0)
@@ -66,11 +68,20 @@ for i in range(frames.shape[0]):
     pred = np.reshape(pred_class, (height, width, 2))
     frame = np.reshape(frame, (height, width, 3))
 
-    for j in range(height):
-        for k in range(width):
-            if (pred[j, k, 0] == 0):
-                frame[j, k, 1] = 200
+    brightness_threshold = 180 # brightness threshold for filtering
+    for j in range(0, height, 2):
+        for k in range(0, width, 2):
+            # Compute the brightness of the current pixel
+            brightness = np.mean(frame[j, k, :])
+            if (pred[j, k, 0] == 0) or (brightness > brightness_threshold):
+                # Crop the replacement image to match the region to be replaced
+                img_reshaped = img_raw[j:j+2, k:k+2, :]
 
+                # Replace the pixel with the cropped replacement image
+                frame[j:j+2, k:k+2, :] = img_reshaped
+
+    # frame = cv2.GaussianBlur(frame, (5, 5), 0)
     # write the segmented frame to a new video file
+    print(f"{i/frames.shape[0]}% done")
     out.write(frame)
 out.release()

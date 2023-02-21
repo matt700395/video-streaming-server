@@ -18,7 +18,10 @@ def CE_dice_loss(y_true, y_pred, lamb1=0.2, lamb2=0.8, gamma=1e-6):
 
     return lamb1 * CE + lamb2 * (dice_loss)
 def read_webcam(height, width):
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(1)
+    # Load the replacement image
+    img_path = 'galaxy_r.jpeg'
+    img_raw = cv2.imread(img_path)
     while True:
         ret, frame = cap.read()
         if not ret:
@@ -45,11 +48,19 @@ def read_webcam(height, width):
         pred = np.reshape(pred_class, (height, width, 2))
         frame = np.reshape(frame, (height, width, 3))
 
-        for j in range(height):
-            for k in range(width):
-                if (pred[j, k, 0] == 0):
-                    frame[j, k, 1] = 200
+        brightness_threshold = 180 # brightness threshold for filtering
+        for j in range(0, height, 2):
+            for k in range(0, width, 2):
+                # Compute the brightness of the current pixel
+                brightness = np.mean(frame[j, k, :])
+                if (pred[j, k, 0] == 0) or (brightness > brightness_threshold):
+                    # Crop the replacement image to match the region to be replaced
+                    img_reshaped = img_raw[j:j+2, k:k+2, :]
 
+                    # Replace the pixel with the cropped replacement image
+                    frame[j:j+2, k:k+2, :] = img_reshaped
+
+        # frame = cv2.GaussianBlur(frame, (5, 5), 0)
         cv2.imshow('frame', frame)
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
