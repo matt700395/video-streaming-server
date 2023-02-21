@@ -71,7 +71,7 @@ void socket_thread(char *serverIP, int serverPort) {
   }
 
   cv::Mat img;
-  img = cv::Mat::zeros(720, 1280, CV_8UC1);
+  img = cv::Mat::zeros(720, 1280, CV_8UC3);
   int imgSize = img.total() * img.elemSize();
   uchar *iptr = img.data;
   int bytes = 0;
@@ -93,6 +93,7 @@ void socket_thread(char *serverIP, int serverPort) {
 	g_mat_mutex.lock();
 
 	// Copy the received data to the Mat object
+	cv::cvtColor(img, img, cv::COLOR_BGR2RGB);
 	img.copyTo(g_mat);
 
 	// Unlock the mutex after accessing the Mat data
@@ -109,7 +110,7 @@ int main(int argc, char **argv) {
   std::cout << "gRPC version: " << grpc::Version() << std::endl;
   std::thread socket_t(socket_thread, argv[1], atoi(argv[2]));
 
-  // Set up the gRPC server on the main thread
+  // Set up the gRPC camera-server on the main thread
   std::string server_address("0.0.0.0:50051");
   StreamServiceImpl service;
   ServerBuilder builder;
@@ -117,7 +118,7 @@ int main(int argc, char **argv) {
   builder.RegisterService(&service);
   std::unique_ptr<Server> server(builder.BuildAndStart());
 
-  // Wait for the gRPC server to shut down
+  // Wait for the gRPC camera-server to shut down
   std::cout << "Server listening on " << server_address << std::endl;
   server->Wait();
 

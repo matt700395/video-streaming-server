@@ -607,3 +607,5 @@ google-services.json
 
 live-streaming-server/client/grpc/protobuf-3.21.12
 live-streaming-server/client/grpc/grpc
+live-streaming-server/live-streaming-server/image_process/model
+live-streaming-server/live-streaming-server/image_process/data

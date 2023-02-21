@@ -19,12 +19,12 @@ set(gRPC_LIB_DIRS "/opt/homebrew/opt/grpc/lib")
 set(RE2_LIB_DIRS "/opt/homebrew/opt/re2/lib")
 
 
-add_executable(client
-        client.cpp
+add_executable(camera-client
+        camera-client.cpp
         ${PROTO_FILES}
         )
 
-target_include_directories(client PRIVATE
+target_include_directories(camera-client PRIVATE
         ${PROTOBUF_INCLUDE_DIRS}
         ${OPENCV_INCLUDE_DIRS}
         ${BOOST_INCLUDE_DIRS}
@@ -33,7 +33,7 @@ target_include_directories(client PRIVATE
         ${RE2_INCLUDE_DIRS}
         )
 
-target_link_directories(client PRIVATE
+target_link_directories(camera-client PRIVATE
         ${PROTOBUF_LIB_DIRS}
         ${OPENCV_LIB_DIRS}
         ${BOOST_LIB_DIRS}
@@ -42,7 +42,7 @@ target_link_directories(client PRIVATE
         ${RE2_LIB_DIRS}
         )
 
-target_link_libraries(client PRIVATE
+target_link_libraries(camera-client PRIVATE
         opencv_imgcodecs
         opencv_highgui
         opencv_imgproc

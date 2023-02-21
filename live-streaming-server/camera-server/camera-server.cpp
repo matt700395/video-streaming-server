@@ -15,7 +15,7 @@ using namespace cv;
 
 void *display(void *);
 
-int capDev = 0;
+int capDev = 1;
 
 VideoCapture cap(capDev); // open the default camera
 
@@ -102,7 +102,7 @@ void *display(void *ptr){
   //----------------------------------------------------------
 
   Mat img, imgGray;
-  img = Mat::zeros(720 , 1280, CV_8UC1);
+  img = Mat::zeros(720 , 1280, CV_8UC3);
   //make it continuous
   if (!img.isContinuous()) {
 	img = img.clone();
@@ -116,7 +116,6 @@ void *display(void *ptr){
   //make img continuos
   if ( ! img.isContinuous() ) {
 	img = img.clone();
-	imgGray = img.clone();
   }
 
   std::cout << "Image Size:" << imgSize << std::endl;
@@ -127,11 +126,12 @@ void *display(void *ptr){
 	cap >> img;
 
 	//do video processing here
-	cvtColor(img, imgGray, COLOR_BGR2GRAY);
+	cv::cvtColor(img, img, cv::COLOR_BGR2RGB);
 
 	//send processed image
-	if ((bytes = send(socket, imgGray.data, imgSize, 0)) < 0){
+	if ((bytes = send(socket, img.data, imgSize, 0)) < 0){
 	  std::cerr << "bytes = " << bytes << std::endl;
+	  std::cerr << socket << " " << imgGray.data << " " << imgSize << std::endl;
 	  break;
 	}
   }
