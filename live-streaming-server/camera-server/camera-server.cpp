@@ -71,7 +71,7 @@ int main(int argc, char** argv)
   std::cout <<  "Waiting for connections...\n"
 			<<  "Server Port:" << port << std::endl;
 
-  //accept connection from an incoming client
+  //accept connection from an incoming camera-client
   while(1){
 	//if (remoteSocket < 0) {
 	//    perror("accept failed!");

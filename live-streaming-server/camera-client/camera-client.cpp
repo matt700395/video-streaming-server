@@ -109,7 +109,7 @@ int main(int argc, char **argv) {
   std::cout << "gRPC version: " << grpc::Version() << std::endl;
   std::thread socket_t(socket_thread, argv[1], atoi(argv[2]));
 
-  // Set up the gRPC server on the main thread
+  // Set up the gRPC camera-server on the main thread
   std::string server_address("0.0.0.0:50051");
   StreamServiceImpl service;
   ServerBuilder builder;
@@ -117,7 +117,7 @@ int main(int argc, char **argv) {
   builder.RegisterService(&service);
   std::unique_ptr<Server> server(builder.BuildAndStart());
 
-  // Wait for the gRPC server to shut down
+  // Wait for the gRPC camera-server to shut down
   std::cout << "Server listening on " << server_address << std::endl;
   server->Wait();
 

@@ -32,7 +32,7 @@ def read_test(video_path, h, w):
 
 # set up the video path and segmentation model
 video_path = '/live-streaming-server/data/test_file/test_videos..avi'
-output_path = './result_vid/output_2.avi'
+output_path = 'result_vid/output_2.avi'
 height = 256
 width = 256
 loaded_model = keras.models.load_model("model/seg_weights.h5",

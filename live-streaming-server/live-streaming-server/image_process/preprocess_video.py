@@ -1,10 +1,10 @@
 import cv2
 
 # input video file
-input_file = './data/test_file/test_video.mp4'
+input_file = 'data/test_file/test_video.mp4'
 
 # output video file
-output_file = './data/test_file/test_videos..avi'
+output_file = 'data/test_file/test_videos..avi'
 
 # frame rate and image size
 fps = 20
