@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package gRPC_stream;
+
+message OcvMat {
+    int32 rows = 1;
+    int32 cols = 2;
+    int32 elt_type = 3;
+    bytes mat_data = 4;
+}
+
+
+message GetMatRequest {
+  bool status = 1;
+}
+
+message GetMatResponse {
+  OcvMat mat = 1;
+}
+
+service StreamService {
+  rpc GetMat (GetMatRequest) returns (stream GetMatResponse) {}
+}
