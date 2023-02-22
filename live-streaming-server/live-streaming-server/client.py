@@ -67,9 +67,8 @@ def filter_raw(frame, loaded_model, img_raw):
     cv2.imshow('frame', frame)
 
 
-
-
 print("gRPC version: " +  grpc.__version__)
+
 # Create a channel to connect to the gRPC server
 try:
     img_raw, loaded_model = load()
@@ -79,7 +78,6 @@ try:
 
     # Create a new `GetMatRequest` message with the `status` field set to True
     request = str_pb.GetMatRequest(status=True)
-
 
     while True:
         # Iterate over the stream of `GetMatResponse` messages returned by the server
